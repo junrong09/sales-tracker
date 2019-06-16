@@ -1,6 +1,8 @@
 import React from 'react';
+import {Redirect, Route, Switch} from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
+import SalesTracker from "./components/SalesTracker";
 
 class App extends React.Component {
     constructor(props) {
@@ -11,24 +13,30 @@ class App extends React.Component {
         }
     }
 
-    onIdChange = (id) => this.setState({id:id});
-    onRoleChange = (role) => this.setState({role:role});
+    onIdChange = (value) => this.setState({id:value});
+    // onRoleChange = (event) => this.setState({role:event.target.value});
 
     render() {
         return (
             <div className="App flex flex-column">
-                <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
 
                 <header className="flex justify-center items-center h3 shadow-2">
                     <h1 className="f3 f2-ns fw7 mv0 sans-serif mid-gray">Sales Tracker</h1>
                 </header>
 
                 <main className="flex justify-center">
-
-                    <Login/>
+                    <Switch>
+                        <Route path='/sales' render={() => <SalesTracker id={this.state.id}/>}/>
+                        <Route render={() => {
+                            if (this.state.id === '')
+                                return <Login onIdChange={this.onIdChange}/>;
+                            else
+                                return <Redirect to="/sales"/>
+                        }}/>
+                    </Switch>
                 </main>
 
-                <footer className="shadow-2">Footer</footer>
+                {/*<footer className="shadow-2">Footer</footer>*/}
             </div>
         );
     }
