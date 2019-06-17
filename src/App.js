@@ -9,7 +9,9 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
+            // id: '',
+            // TODO: TEMP FOR DEV
+            id: 'sales1122',
             role: ''
         }
     }
