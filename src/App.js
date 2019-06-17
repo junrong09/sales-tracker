@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
 import SalesTracker from "./components/SalesTracker";
+import NavigationBar from "./components/NavigationBar";
 
 class App extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
 
     onIdChange = (value) => this.setState({id:value});
     onRoleChange = (value) => this.setState({role:value});
+    onLogout = () => this.setState({id:'', role:''});
 
     render() {
         return (
@@ -25,16 +27,24 @@ class App extends React.Component {
 
                 </header>
 
-                <main className="flex justify-center">
-                    <Switch>
-                        <Route path='/sales' render={() => <SalesTracker id={this.state.id}/>}/>
-                        <Route render={() => {
-                            if (this.state.id === '')
-                                return <Login onIdChange={this.onIdChange} onRoleChange={this.onRoleChange}/>;
-                            else
-                                return <Redirect to="/sales"/>
-                        }}/>
-                    </Switch>
+                <main className="flex flex-column items-center">
+                    {
+                        this.state.id === '' ?
+                            // Non-user
+                            <React.Fragment>
+                                <Login onIdChange={this.onIdChange} onRoleChange={this.onRoleChange}/>
+                                <Redirect to="/"/>
+                            </React.Fragment>:
+                            // User (logged in)
+                            <React.Fragment>
+                                <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
+                                <Switch>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id}/>}/>
+                                    <Route render={() => <Redirect to="/sales"/>}/>
+                                </Switch>
+                            </React.Fragment>
+                    }
+
                 </main>
 
                 {/*<footer className="shadow-2">Footer</footer>*/}

@@ -36,7 +36,7 @@ class Login extends React.Component {
                     <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
                     {/*<FormTextBox label="Name"/>*/}
                     <Link to="/sales">
-                    <FormButton label="Next" onUserVerify={this.onUserVerify}/>
+                    <FormButton label="Next" onClick={this.onUserVerify}/>
                     </Link>
                 </div>
         )
