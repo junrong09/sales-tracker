@@ -12,7 +12,6 @@ class Login extends React.Component {
     }
 
     onTempIdChange = (event) => this.setState({tempId:event.target.value});
-
     onUserVerify = () => {
         fetch("http://localhost:8080/verify?user=" + this.state.tempId, {
             method: 'get'
@@ -21,12 +20,13 @@ class Login extends React.Component {
             .then(user => {
                 if (user.validity === true) {
                     this.props.onIdChange(user.id);
+                    this.props.onRoleChange(user.role);
                     console.log("USER LOGIN SUCCESS");
                 } else {
-                    console.log("USER LOGIN NOT FOUND");
+                    alert("USER LOGIN NOT FOUND");
                 }
             })
-            .catch(console.log);
+            .catch(alert);
     };
 
     render() {
