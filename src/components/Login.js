@@ -23,7 +23,7 @@ class Login extends React.Component {
                     this.props.onRoleChange(user.role);
                     console.log("USER LOGIN SUCCESS");
                 } else {
-                    alert("USER LOGIN NOT FOUND");
+                    alert("User sales record not found!");
                 }
             })
             .catch(alert);

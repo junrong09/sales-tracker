@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 class NavigationBar extends React.Component {
     render() {
         return (
-            <div className="flex items-center w-100 ph3 justify-between">
-                <p>Welcome, {this.props.id}</p>
+            <div className="flex items-center w-100 ph3 justify-between justify-end-ns">
+                <p className="sans-serif mid-gray b mr3">Welcome, {this.props.id}</p>
                 <Link to="/">
                     <FormButton label="Logout" onClick={this.props.onLogout}/>
                 </Link>
