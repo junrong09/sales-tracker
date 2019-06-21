@@ -1,57 +1,38 @@
 import React from "react";
-import {
-    Bar,
-    CartesianGrid,
-    ComposedChart,
-    Label,
-    LabelList,
-    Legend,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis
-} from "recharts";
+import TabBar from "./TabBar";
+import SalesOverallTab from "./SalesOverallTab";
+import SalesTransactionsTab from "./SalesTransactionsTab";
 
 class SalesTracker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: undefined
+            data: {},
+            tab: "transactions"
         }
     }
 
+    onTabChange = (newTab) => (this.setState({tab: newTab}));
+
     componentDidMount() {
-        fetch("http://localhost:8080/sales?user=" + this.props.id, {
+        fetch("http://localhost:8080/salesprofile?user=" + this.props.id, {
             method: 'get'})
             .then(raw  => raw.json())
             .then(data => {
-                this.setState({data: [data]});
+                this.setState({data: data});
             })
             .catch(console.log);
     }
 
     render() {
         return (
-            <div className="flex flex-column items-center vh-50 w-100 mw6">
-                <p className="b">10 Aug 2018 : Sales Chart</p>
-                <ResponsiveContainer width="90%" height="100%" className="mt2">
-                    <ComposedChart data={this.state.data}>
-                        <CartesianGrid stroke="#f5f5f5"/>
-                        <XAxis dataKey="month">
-                        </XAxis>
-                        <YAxis domain={['auto','dataMax + 100']}>
-                            <Label value="Sales Amount" angle={270} position="insideLeft"/>
-                        </YAxis>
-                        <Tooltip />
-                        <Legend verticalAlign="bottom"/>
-                        <Bar dataKey="target" fill="#82ca9d" maxBarSize={70}>
-                            <LabelList dataKey="target" position="top" className="f6"/>
-                        </Bar>
-                        <Bar dataKey="actual" fill="#413ea0" maxBarSize={70}>
-                            <LabelList dataKey="actual" position="top" className="f6"/>
-                        </Bar>
-                    </ComposedChart>
-                </ResponsiveContainer>
+            <div className="flex flex-column items-center vh-75 w-100 mw6">
+                <TabBar onTabChange={this.onTabChange}/>
+                {
+                    (this.state.tab === "overall") ?
+                        <SalesOverallTab data={this.state.data}/> :
+                        <SalesTransactionsTab date={this.state.data}/>
+                }
             </div>
         )
     }

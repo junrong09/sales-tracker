@@ -9,8 +9,8 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // TODO: TEMP FOR DEV
-            id: '',
+            // TODO: id hardcoded for dev (to be removed)
+            id: '66',
             role: ''
         }
     }
