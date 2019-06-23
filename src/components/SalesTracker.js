@@ -2,6 +2,7 @@ import React from "react";
 import TabBar from "./TabBar";
 import SalesOverallTab from "./SalesOverallTab";
 import SalesTransactionsTab from "./SalesTransactionsTab";
+import SalesTargetSetterTab from "./SalesTargetSetterTab";
 
 class SalesTracker extends React.Component {
     constructor(props) {
@@ -27,12 +28,10 @@ class SalesTracker extends React.Component {
     render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100 mw6">
-                <TabBar onTabChange={this.onTabChange}/>
-                {
-                    (this.state.tab === "overall") ?
-                        <SalesOverallTab data={this.state.data}/> :
-                        <SalesTransactionsTab date={this.state.data}/>
-                }
+                <TabBar onTabChange={this.onTabChange} tab={this.state.tab}/>
+                {this.state.tab === "overall" && <SalesOverallTab data={this.state.data}/>}
+                {this.state.tab === "transactions" && <SalesTransactionsTab data={this.state.data}/>}
+                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.state.data}/>}
             </div>
         )
     }
