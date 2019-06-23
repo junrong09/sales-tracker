@@ -9,13 +9,17 @@ class SalesTracker extends React.Component {
         super(props);
         this.state = {
             data: {},
-            tab: "transactions"
+            // TODO: Set back to overall
+            tab: "overall"
         }
     }
 
-    onTabChange = (newTab) => (this.setState({tab: newTab}));
+    onTabChange = (newTab) => {
+        this.setState({tab: newTab});
+        this.fetchUserProfile();
+    };
 
-    componentDidMount() {
+    fetchUserProfile = () => {
         fetch("http://localhost:8080/salesprofile?user=" + this.props.id, {
             method: 'get'})
             .then(raw  => raw.json())
@@ -23,6 +27,10 @@ class SalesTracker extends React.Component {
                 this.setState({data: data});
             })
             .catch(console.log);
+    };
+
+    componentDidMount() {
+        this.fetchUserProfile();
     }
 
     render() {
@@ -31,7 +39,7 @@ class SalesTracker extends React.Component {
                 <TabBar onTabChange={this.onTabChange} tab={this.state.tab}/>
                 {this.state.tab === "overall" && <SalesOverallTab data={this.state.data}/>}
                 {this.state.tab === "transactions" && <SalesTransactionsTab data={this.state.data}/>}
-                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.state.data}/>}
+                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.state.data} fetchUserProfile={this.fetchUserProfile}/>}
             </div>
         )
     }
