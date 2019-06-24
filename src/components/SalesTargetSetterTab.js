@@ -38,11 +38,11 @@ class SalesTargetSetterTab extends Component {
     render() {
         return (
             <Fragment>
-                <p className="b sans-serif mid-gray">Target Setter for 10 Aug 2018</p>
+                <p className="b sans-serif mid-gray">Target for 10 Aug 2018</p>
                 <p>Current Target: {this.props.data.target}</p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
                 <FormTextBox label="Target" onChange={this.onTargetChange}/>
-                <FormButton label="Save" onClick={this.onTargetSubmit}/>
+                <FormButton label="Submit" onClick={this.onTargetSubmit}/>
                 </div>
             </Fragment>
         );

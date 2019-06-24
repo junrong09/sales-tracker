@@ -13,6 +13,10 @@ import {
 
 class SalesOverallTab extends React.Component {
 
+    roundToHundreds = (num) => {
+        return Math.ceil(num / 100) * 100;
+    };
+
     render() {
         // var transactionCount = typeof this.props.data.transactionCount === "undefined" ?
         //     0 : this.props.data.transactionCount;
@@ -25,7 +29,7 @@ class SalesOverallTab extends React.Component {
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.props.data]}>
                         <CartesianGrid stroke="#f5f5f5"/>
-                        <YAxis domain={[0,'dataMax + 100']}>
+                        <YAxis domain={[0, (num) => this.roundToHundreds(num * 1.1)]}>
                             <Label value="Sales Amount" angle={270} position="insideLeft"/>
                         </YAxis>
                         <Tooltip />
