@@ -12,7 +12,11 @@ class SalesTargetSetterTab extends Component {
 
     onTargetChange = (event) => this.setState({newTarget: event.target.value});
     onTargetSubmit = () => {
-        //TODO: input validation for float
+        if (isNaN(this.state.newTarget)) {
+            alert("Invalid input");
+            return;
+        }
+
         fetch("http://localhost:8080/settarget", {
             method: 'post', headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id, target: parseFloat(this.state.newTarget)})})
@@ -25,7 +29,10 @@ class SalesTargetSetterTab extends Component {
                 else
                     alert("Please try again");
             })
-            .catch(console.log);
+            .catch((err) => {
+                console.log(err);
+                alert("Error Caught");
+            });
     };
 
     render() {
