@@ -1,5 +1,15 @@
 import React from "react";
-import {Bar, CartesianGrid, ComposedChart, Label, LabelList, Legend, ResponsiveContainer, YAxis} from "recharts";
+import {
+    Bar,
+    CartesianGrid,
+    ComposedChart,
+    Label,
+    LabelList,
+    Legend,
+    ResponsiveContainer,
+    Tooltip,
+    YAxis
+} from "recharts";
 
 class SalesOverallTab extends React.Component {
 
@@ -15,15 +25,16 @@ class SalesOverallTab extends React.Component {
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.props.data]}>
                         <CartesianGrid stroke="#f5f5f5"/>
-                        <YAxis domain={['auto','dataMax + 100']}>
+                        <YAxis domain={[0,'dataMax + 100']}>
                             <Label value="Sales Amount" angle={270} position="insideLeft"/>
                         </YAxis>
+                        <Tooltip />
                         <Legend verticalAlign="bottom"/>
                         <Bar dataKey="target" fill="#82ca9d" maxBarSize={70}>
-                            <LabelList dataKey="target" position="top" className="f6"/>
+                            <LabelList dataKey="target" position="top"/>
                         </Bar>
                         <Bar dataKey="actual" fill="#413ea0" maxBarSize={70}>
-                            <LabelList dataKey="actual" position="top" className="f6"/>
+                            <LabelList dataKey="actual" position="top"/>
                         </Bar>
                     </ComposedChart>
                 </ResponsiveContainer>
