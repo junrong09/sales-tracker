@@ -10,7 +10,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             // TODO: id hardcoded for dev (to be removed)
-            id: '66',
+            id: '',
             role: ''
         }
     }
