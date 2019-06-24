@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
+import {HOST} from "./Constant";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class SalesTargetSetterTab extends Component {
             return;
         }
 
-        fetch("http://localhost:8080/settarget", {
+        fetch(HOST + "settarget", {
             method: 'post', headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.data.id, target: parseFloat(this.state.newTarget)})})
             .then(res  => res.json())

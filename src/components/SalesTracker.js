@@ -3,6 +3,7 @@ import TabBar from "./TabBar";
 import SalesOverallTab from "./SalesOverallTab";
 import SalesTransactionsTab from "./SalesTransactionsTab";
 import SalesTargetSetterTab from "./SalesTargetSetterTab";
+import {HOST} from "./Constant";
 
 class SalesTracker extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class SalesTracker extends React.Component {
     };
 
     fetchUserProfile = () => {
-        fetch("http://localhost:8080/salesprofile?user=" + this.props.id, {
+        fetch(HOST + "salesprofile?user=" + this.props.id, {
             method: 'get'})
             .then(raw  => raw.json())
             .then(data => {

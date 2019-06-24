@@ -2,6 +2,7 @@ import React from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
+import {HOST} from "./Constant";
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class Login extends React.Component {
 
     onTempIdChange = (event) => this.setState({tempId:event.target.value});
     onUserVerify = () => {
-        fetch("http://localhost:8080/verify?user=" + this.state.tempId, {
+        fetch(HOST + "verify?user=" + this.state.tempId, {
             method: 'get'
         })
             .then(response => response.json())
