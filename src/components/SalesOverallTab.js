@@ -25,7 +25,7 @@ class SalesOverallTab extends React.Component {
 
         return (
             <React.Fragment>
-                <p className="b sans-serif mid-gray">10 Aug 2018 : Sales Chart</p>
+                <p className="b sans-serif mid-gray">24 Jun 2019 : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.props.data]}>
                         <CartesianGrid stroke="#f5f5f5"/>

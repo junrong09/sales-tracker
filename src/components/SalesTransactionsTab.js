@@ -16,11 +16,11 @@ class SalesTransactionsTab extends React.Component {
 
         return (
             <React.Fragment>
-                <p className="b sans-serif mid-gray">10 Aug 2018 : Sales Transactions</p>
+                <p className="b sans-serif mid-gray">24 Jun 2019 : Sales Transactions</p>
                 {isPropDefined &&
                 <Table
                     width={300}
-                    height={300}
+                    height={400}
                     headerHeight={30}
                     rowHeight={25}
                     rowCount={this.props.data.transactions.length}
