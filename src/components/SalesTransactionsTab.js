@@ -5,13 +5,8 @@ import 'react-virtualized/styles.css';
 class SalesTransactionsTab extends React.Component {
     render() {
         let isPropDefined = false;
-        if (typeof this.props.data.transactions !== "undefined") {
+        if (typeof this.props.data !== "undefined") {
             isPropDefined = true;
-            this.props.data.transactions.forEach(function(tran) {
-                tran.time = tran.hour.toString() + ":" + tran.min.toString();
-            });
-        } else {
-
         }
 
         return (
@@ -23,8 +18,8 @@ class SalesTransactionsTab extends React.Component {
                     height={400}
                     headerHeight={30}
                     rowHeight={25}
-                    rowCount={this.props.data.transactions.length}
-                    rowGetter={({index}) => this.props.data.transactions[index]}
+                    rowCount={this.props.data.length}
+                    rowGetter={({index}) => this.props.data[index]}
                     className=""
                     headerClassName="mid-gray"
                     rowClassName="bb b--moon-gray"
