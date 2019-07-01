@@ -4,20 +4,41 @@ import './App.css';
 import Login from './components/Login';
 import SalesTracker from "./components/SalesTracker";
 import NavigationBar from "./components/NavigationBar";
+import {HOST} from "./components/Constant";
+import LocalStorage from "./components/LocalStorage";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             // TODO: id hardcoded for dev (to be removed)
-            id: '',
-            role: ''
+            id: LocalStorage.getID(),
+            transactions: undefined
         }
     }
 
-    onIdChange = (value) => this.setState({id:value});
-    onRoleChange = (value) => this.setState({role:value});
-    onLogout = () => this.setState({id:'', role:''});
+    onIdChange = (value) => {
+        this.setState({id:value});
+        LocalStorage.saveID(value);
+    };
+    onTransactionsFetchID = (id) => {
+        fetch(HOST + "transactions?id=" + id, {
+            method: 'get'
+        })
+            .then(response => response.json())
+            .then(json => json.transactions)
+            .then(transactions => {
+                this.setState({transactions: transactions});
+                console.log("Fetch successful: " + transactions.length + " trans");
+                console.log(transactions);
+            })
+            .catch(alert);
+    };
+    onTransactionsFetch = () => this.onTransactionsFetchID(this.state.id);
+    onLogout = () => {
+        LocalStorage.removeID();
+        this.setState({id: '', transactions: undefined});
+    };
 
     render() {
         return (
@@ -25,7 +46,6 @@ class App extends React.Component {
 
                 <header className="flex justify-center items-center h3 shadow-2">
                     <h1 className="f3 f2-ns fw7 mv0 sans-serif mid-gray">Sales Tracker</h1>
-
                 </header>
 
                 <main className="flex flex-column items-center">
@@ -33,14 +53,15 @@ class App extends React.Component {
                         this.state.id === '' ?
                             // Non-user
                             <React.Fragment>
-                                <Login onIdChange={this.onIdChange} onRoleChange={this.onRoleChange}/>
+                                <Login onIdChange={this.onIdChange}
+                                       onTransactionsFetch={this.onTransactionsFetchID}/>
                                 <Redirect to="/"/>
                             </React.Fragment>:
                             // User (logged in)
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id}/>}/>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} onTransactionsFetch={this.onTransactionsFetch}/>}/>
                                     <Route render={() => <Redirect to="/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
