@@ -2,7 +2,6 @@ import React from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
-import {HOST} from "./Constant";
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,31 +12,16 @@ class Login extends React.Component {
     }
 
     onTempIdChange = (event) => this.setState({tempId:event.target.value});
-    onUserVerify = () => {
-        fetch(HOST + "verify?user=" + this.state.tempId, {
-            method: 'get'
-        })
-            .then(response => response.json())
-            .then(user => {
-                if (user.validity === true) {
-                    this.props.onIdChange(user.id);
-                    this.props.onRoleChange(user.role);
-                    console.log("USER LOGIN SUCCESS");
-                } else {
-                    alert("User's sales record not found!");
-                }
-            })
-            .catch(alert);
-    };
 
     render() {
         return (
                 <div className="flex flex-column w-90 mw6 mv5 mv6-ns pv4 ph3 br2 shadow-3">
                     <span className="f4 f3-ns fw5 mb3 sans-serif mid-gray">Login</span>
                     <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
-                    {/*<FormTextBox label="Name"/>*/}
                     <Link to="/sales">
-                    <FormButton label="Next" onClick={this.onUserVerify}/>
+                    <FormButton label="Next" onClick={() => {
+                        this.props.onIdChange(this.state.tempId);
+                    }}/>
                     </Link>
                 </div>
         )
