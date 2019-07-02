@@ -10,13 +10,14 @@ import {
     Tooltip,
     YAxis
 } from "recharts";
+import LocalStorage from "./LocalStorage";
 
 class SalesOverallTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             sales: undefined,
-            target: undefined,
+            target: LocalStorage.getTarget(this.props.id, new Date()),
             transCount: undefined,
             memberServed: undefined
         }
@@ -54,7 +55,7 @@ class SalesOverallTab extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <p className="b sans-serif mid-gray">24 Jun 2019 : Sales Chart</p>
+                <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})} : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.state]}>
                         <CartesianGrid stroke="#f5f5f5"/>

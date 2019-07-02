@@ -18,7 +18,7 @@ class LocalStorage {
     };
     static remove = (key) => {
         return window.localStorage.removeItem(key);
-    }
+    };
 
     static storageAvailable() {
         try {

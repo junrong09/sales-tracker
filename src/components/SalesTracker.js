@@ -26,7 +26,7 @@ class SalesTracker extends React.Component {
         return (
             <div className="flex flex-column items-center vh-75 w-100 mw6">
                 <TabBar onTabChange={this.onTabChange} tab={this.state.tab}/>
-                {this.state.tab === "overall" && <SalesOverallTab data={this.props.transactions}/>}
+                {this.state.tab === "overall" && <SalesOverallTab data={this.props.transactions} id={this.props.id}/>}
                 {this.state.tab === "transactions" && <SalesTransactionsTab data={this.props.transactions}/>}
                 {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.props.transactions} id={this.props.id}/>}
             </div>
