@@ -11,7 +11,6 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // TODO: id hardcoded for dev (to be removed)
             id: LocalStorage.getID(),
             transactions: undefined
         }
@@ -32,7 +31,10 @@ class App extends React.Component {
                 console.log("Fetch successful: " + transactions.length + " trans");
                 console.log(transactions);
             })
-            .catch(alert);
+            .catch(err => {
+                // TODO: FETCH MESSAGE
+                console.log(err);
+            });
     };
     onTransactionsFetch = () => this.onTransactionsFetchID(this.state.id);
     onLogout = () => {

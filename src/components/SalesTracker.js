@@ -8,7 +8,6 @@ class SalesTracker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // TODO: Set back to overall
             tab: "overall"
         }
     }

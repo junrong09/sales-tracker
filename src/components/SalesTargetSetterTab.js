@@ -49,7 +49,7 @@ class SalesTargetSetterTab extends Component {
             })
             .catch((err) => {
                 console.log(err);
-                alert("Error Caught");
+                // TODO: FETCH MESSAGE
             });
     };
 
