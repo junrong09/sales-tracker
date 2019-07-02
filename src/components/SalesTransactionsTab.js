@@ -11,7 +11,7 @@ class SalesTransactionsTab extends React.Component {
 
         return (
             <React.Fragment>
-                <p className="b sans-serif mid-gray">24 Jun 2019 : Sales Transactions</p>
+                <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})} : Sales Transactions</p>
                 {isPropDefined &&
                 <Table
                     width={300}
