@@ -13,22 +13,7 @@ class SalesTransactionsTab extends React.Component {
             <React.Fragment>
                 <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})} : Sales Transactions</p>
                 {isPropDefined &&
-                <Table
-                    width={300}
-                    height={400}
-                    headerHeight={30}
-                    rowHeight={25}
-                    rowCount={this.props.data.length}
-                    rowGetter={({index}) => this.props.data[index]}
-                    className=""
-                    headerClassName="mid-gray"
-                    rowClassName="bb b--moon-gray"
-                    gridClassName="mid-gray"
-                >
-                    <Column width={200} label='SKU' dataKey='sku'/>
-                    <Column width={200} label='Value' dataKey='value'/>
-                    <Column width={200} label='Time' dataKey='time'/>
-                </Table>
+                <React.Fragment/>
                 }
 
             </React.Fragment>
