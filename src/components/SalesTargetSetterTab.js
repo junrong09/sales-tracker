@@ -57,7 +57,7 @@ class SalesTargetSetterTab extends Component {
 
 
         return (
-            <Fragment>
+            <div className="flex flex-column items-center vh-75 w-100">
                 <div className="flex justify-around w-100">
                     <input type="button" value="⮜" className={"f2 b--none bg-white blue " + (this.state.date.toDateString() === new Date().toDateString() ? "" : "hidden")} onClick={() => this.onDateChange(-1)}/>
                     <p className="b sans-serif mid-gray">Target for {this.state.date.toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})}</p>
@@ -66,10 +66,10 @@ class SalesTargetSetterTab extends Component {
                 </div>
                 <p>Current Target: {this.state.curTarget === null ? 0 : this.state.curTarget}</p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
-                <FormTextBox label="Target" onChange={this.onTargetChange}/>
-                <FormButton label="Submit" onClick={this.onTargetSubmit}/>
+                    <FormTextBox label="Target" onChange={this.onTargetChange}/>
+                    <FormButton label="Submit" onClick={this.onTargetSubmit}/>
                 </div>
-            </Fragment>
+            </div>
         );
     }
 }

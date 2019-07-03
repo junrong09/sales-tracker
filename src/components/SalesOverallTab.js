@@ -54,7 +54,7 @@ class SalesOverallTab extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className="flex flex-column items-center vh-75 w-100">
                 <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})} : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.state]}>
@@ -78,7 +78,7 @@ class SalesOverallTab extends React.Component {
                 <p className="b sans-serif mid-gray f5 ma0">Members Served:
                     {this.state.memberServed}
                 </p>
-            </React.Fragment>
+            </div>
         )
     }
 }
