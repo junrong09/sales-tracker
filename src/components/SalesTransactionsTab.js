@@ -1,5 +1,5 @@
 import React from "react";
-import ReactTable from 'react-table'
+import ReactTable, {ReactTableDefaults} from 'react-table'
 import 'react-table/react-table.css'
 import {aggregateData} from "../classes/Transaction";
 
@@ -53,22 +53,24 @@ class SalesTransactionsTab extends React.Component {
                     year: "numeric"
                 })} : Sales Transactions</p>
                 {typeof this.props.data !== "undefined" &&
-                    <div className="flex flex-column items-center w-100 pb3">
-                <ReactTable columns={this.headersL1} data={formattedData} defaultPageSize={10}
-                            className="vh-75 w-90 pb2 f5" showPageJump={false}
-                            showPagination={formattedData.length > 10}
-                            SubComponent={row => {
-                                return (
-                                    <div className="ph2 pv3">
-                                        <ReactTable columns={this.headersL2} data={row.original.lines}
-                                                    defaultPageSize={row.original.lines.length > 5 ? 5 : row.original.lines.length}
-                                                    showPageJump={false} showPageSizeOptions={false}
-                                                    showPagination={row.original.lines.length > 5} className="f7"/>
-                                    </div>
-                                );
-                            }}
-                />
-                    </div>
+                <div className="flex flex-column items-center w-100 pb4">
+                    <ReactTable columns={this.headersL1} data={formattedData} defaultPageSize={10}
+                                className="vh-75 w-90 pb2 f5 mid-gray" showPageJump={false}
+                                showPagination={formattedData.length > 10}
+                                column={{...ReactTableDefaults.column, headerClassName: "b"}}
+                                SubComponent={row => {
+                                    return (
+                                        <div className="ph2 pv3">
+                                            <ReactTable columns={this.headersL2} data={row.original.lines}
+                                                        defaultPageSize={row.original.lines.length > 5 ? 5 : row.original.lines.length}
+                                                        column={{...ReactTableDefaults.column, headerClassName: "b" , className: "bg-washed-blue"}}
+                                                        showPageJump={false} showPageSizeOptions={false}
+                                                        showPagination={row.original.lines.length > 5} className="f7"/>
+                                        </div>
+                                    );
+                                }}
+                    />
+                </div>
                 }
             </div>
         )
