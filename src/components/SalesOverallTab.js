@@ -59,7 +59,7 @@ class SalesOverallTab extends React.Component {
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.state]}>
                         <CartesianGrid stroke="#f5f5f5"/>
-                        <YAxis domain={[0, (num) => this.roundToHundreds(num * 1.1)]}>
+                        <YAxis domain={[0, (num) => this.roundToHundreds(num * 1.15)]}>
                             <Label value="Sales Amount" angle={270} position="insideLeft"/>
                         </YAxis>
                         <Tooltip />
@@ -68,7 +68,7 @@ class SalesOverallTab extends React.Component {
                             <LabelList dataKey="target" position="top"/>
                         </Bar>
                         <Bar dataKey="sales" fill="#413ea0" maxBarSize={70}>
-                            <LabelList dataKey="actual" position="top"/>
+                            <LabelList dataKey="sales" position="top"/>
                         </Bar>
                     </ComposedChart>
                 </ResponsiveContainer>
