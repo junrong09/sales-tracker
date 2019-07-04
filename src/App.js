@@ -7,6 +7,8 @@ import NavigationBar from "./components/NavigationBar";
 import {HOST} from "./components/Constant";
 import LocalStorage from "./components/LocalStorage";
 import logo from "./img/logo.png";
+import 'react-toastify/dist/ReactToastify.css';
+import {toastComponent, toastError} from "./components/Toast";
 
 class App extends React.Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class App extends React.Component {
                 console.log(transactions);
             })
             .catch(err => {
-                // TODO: FETCH MESSAGE
+                toastError("fetch", "❌ No connection found");
                 console.log(err);
             });
     };
@@ -74,6 +76,7 @@ class App extends React.Component {
                 </main>
 
                 {/*<footer className="shadow-2">Footer</footer>*/}
+                {toastComponent}
             </div>
         );
     }

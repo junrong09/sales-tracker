@@ -5,6 +5,7 @@ import {HOST} from "./Constant";
 import LocalStorage from "./LocalStorage";
 import leftArrow from "../img/left-arrow.png";
 import rightArrow from "../img/right-arrow.png";
+import {toastError, toastSuccess, toastWarning} from "./Toast";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -32,8 +33,9 @@ class SalesTargetSetterTab extends Component {
     };
 
     onTargetSubmit = () => {
-        if (isNaN(this.state.newTarget)) {
-            alert("Invalid input");
+
+        if (isNaN(this.state.newTarget) || this.state.newTarget === '') {
+            toastWarning("invalidInput", "⚠️ Invalid Input");
             return;
         }
 
@@ -47,16 +49,15 @@ class SalesTargetSetterTab extends Component {
                 console.log(res);
                 LocalStorage.saveTarget(this.props.id, this.state.date, this.state.newTarget);
                 this.setState({curTarget: this.state.newTarget});
-                alert("New target saved");
+                toastSuccess("setTarget", "✔️ Target Submitted");
             })
             .catch((err) => {
+                toastError("fetch", "❌ No connection found");
                 console.log(err);
-                // TODO: FETCH MESSAGE
             });
     };
 
     render() {
-
 
         return (
             <div className="flex flex-column items-center vh-75 w-100">
