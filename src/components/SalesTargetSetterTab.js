@@ -1,8 +1,10 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {HOST} from "./Constant";
 import LocalStorage from "./LocalStorage";
+import leftArrow from "../img/left-arrow.png";
+import rightArrow from "../img/right-arrow.png";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -58,10 +60,10 @@ class SalesTargetSetterTab extends Component {
 
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <div className="flex justify-around w-100">
-                    <input type="button" value="⮜" className={"f2 b--none bg-white blue " + (this.state.date.toDateString() === new Date().toDateString() ? "" : "hidden")} onClick={() => this.onDateChange(-1)}/>
-                    <p className="b sans-serif mid-gray">Target for {this.state.date.toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})}</p>
-                    <input type="button" value="⮞" className={"f2 b--none bg-white blue " + (this.state.date.toDateString() === new Date().toDateString() ? "hidden" : "")}
+                <div className="flex justify-around items-center w-100 mt2">
+                    <input type="image" alt="Prev day navigator" src={leftArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "" : "hidden")} onClick={() => this.onDateChange(-1)}/>
+                    <span className="b sans-serif mid-gray">Target for {this.state.date.toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})}</span>
+                    <input type="image" alt="Next day navigator" src={rightArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "hidden" : "")}
                            onClick={() => this.onDateChange(1)}/>
                 </div>
                 <p>Current Target: {this.state.curTarget === null ? 0 : this.state.curTarget}</p>
