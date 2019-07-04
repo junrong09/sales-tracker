@@ -6,6 +6,7 @@ import SalesTracker from "./components/SalesTracker";
 import NavigationBar from "./components/NavigationBar";
 import {HOST} from "./components/Constant";
 import LocalStorage from "./components/LocalStorage";
+import logo from "./img/logo.png";
 
 class App extends React.Component {
     constructor(props) {
@@ -47,6 +48,7 @@ class App extends React.Component {
             <div className="App flex flex-column">
 
                 <header className="flex justify-center items-center h3 shadow-2">
+                    <img src={logo} alt="DFS" className="w2 h2 mh2 mh3-ns"/>
                     <h1 className="f3 f2-ns fw7 mv0 sans-serif mid-gray">Sales Tracker</h1>
                 </header>
 
