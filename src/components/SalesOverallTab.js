@@ -35,12 +35,19 @@ class SalesOverallTab extends React.Component {
         }
         console.log("Computed Aggregate");
 
-        let sales = data.map(obj => obj.value).reduce((acc, val) => acc+val);
-        this.setState({sales: sales});
-        let transCount = (new Set(data.map(obj => obj.transaction_id))).size;
-        this.setState({transCount: transCount});
-        let memberServed = (new Set(data.map(obj => obj.member_id))).size;
-        this.setState({memberServed: memberServed});
+        if (data.length === 0) {
+            this.setState({sales: 0});
+            this.setState({transCount: 0});
+            this.setState({memberServed: 0});
+        } else {
+            let sales = data.map(obj => obj.value).reduce((acc, val) => acc+val);
+            this.setState({sales: sales});
+            let transCount = (new Set(data.map(obj => obj.txnNum))).size;
+            this.setState({transCount: transCount});
+            let memberServed = (new Set(data.map(obj => obj.memberNum))).size;
+            this.setState({memberServed: memberServed});
+        }
+
     };
 
     componentDidMount() {

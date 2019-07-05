@@ -1,9 +1,9 @@
 export const aggregateData = (transactions) => {
     let map = new Map();
     transactions.forEach((t) => {
-       let list = map.get(t.transaction_id);
+       let list = map.get(t.txnNum);
        if (!list) {
-           map.set(t.transaction_id, [t]);
+           map.set(t.txnNum, [t]);
        } else {
            list.push(t);
        }
@@ -17,33 +17,36 @@ export const aggregateData = (transactions) => {
 };
 
 const newTransaction = (lines) => {
-    let qty = 0;
+    let quantity = 0;
     let value = 0;
     let items = [];
 
     lines.forEach((line) => {
-       qty = qty + line.qty;
+       quantity = quantity + line.quantity;
        value = value + line.value;
-       items.push(newLine(line.sku, line.brand, line.category, line.qty, line.value));
+       items.push(newLine(line.itemId, line.brand, line.category, line.quantity, line.value));
     });
 
     return {
-        time: lines[0].time,
-        transaction_id: lines[0].transaction_id,
-        qty: qty,
-        value: value,
+        txnDate: lines[0].txnDate.slice(0,8),
+        txnNum: lines[0].txnNum,
+        quantity: quantity,
+        value: SgdFormatter(value),
         member_id: lines[0].member_id,
         lines: items
     }
 };
 
-const newLine = (sku, brand, category, qty, value) => {
+const newLine = (itemId, brand, category, quantity, value) => {
     return {
-        sku: sku,
+        itemId: itemId,
         brand: brand,
         category: category,
-        unit_value: value/qty,
-        qty: qty,
-        value: value
+        unit_value: SgdFormatter(value/quantity),
+        quantity: quantity,
+        value: SgdFormatter(value)
     }
 };
+
+const SgdFormatter = (num) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'SGD' })
+    .format(num).slice(4);

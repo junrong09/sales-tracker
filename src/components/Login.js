@@ -2,6 +2,7 @@ import React from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
+import {toastWarning} from "./Toast";
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +21,11 @@ class Login extends React.Component {
                     <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
                     <Link to="/sales">
                     <FormButton label="Next" onClick={() => {
-                        this.props.onIdChange(this.state.tempId);
+                        if (this.state.tempId === '' || /\s/.test(this.state.tempId)) {
+                            toastWarning("invalidLogin", "Invalid id");
+                        } else {
+                            this.props.onIdChange(this.state.tempId);
+                        }
                     }}/>
                     </Link>
                 </div>

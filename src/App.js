@@ -28,7 +28,7 @@ class App extends React.Component {
             method: 'get'
         })
             .then(response => response.json())
-            .then(json => json.transactions)
+            .then(json => json.txn)
             .then(transactions => {
                 this.setState({transactions: transactions});
                 console.log("Fetch successful: " + transactions.length + " trans");
@@ -56,7 +56,7 @@ class App extends React.Component {
 
                 <main className="flex flex-column items-center">
                     {
-                        this.state.id === '' ?
+                        this.state.id === '' || /\s/.test(this.state.id) ?
                             // Non-user
                             <React.Fragment>
                                 <Login onIdChange={this.onIdChange}
