@@ -10,7 +10,7 @@ export const toastComponent = <ToastContainer
     rtl={false}
     transition={Flip}
     className="b tl f6 sans-serif"
-    draggablePercent={60}
+    draggablePercent={55}
     pauseOnVisibilityChange
     draggable
     pauseOnHover
