@@ -4,11 +4,11 @@ import './App.css';
 import Login from './components/Login';
 import SalesTracker from "./components/SalesTracker";
 import NavigationBar from "./components/NavigationBar";
-import {HOST} from "./components/Constant";
 import LocalStorage from "./components/LocalStorage";
 import logo from "./img/logo.png";
 import 'react-toastify/dist/ReactToastify.css';
 import {toastComponent, toastError} from "./components/Toast";
+import {GET_TXN} from "./components/Constant";
 
 class App extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class App extends React.Component {
         LocalStorage.saveID(value);
     };
     onTransactionsFetchID = (id) => {
-        fetch(HOST + "transactions?id=" + id, {
+        fetch(GET_TXN(id), {
             method: 'get'
         })
             .then(response => response.json())

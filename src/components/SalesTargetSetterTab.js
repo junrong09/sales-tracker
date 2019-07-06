@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
-import {HOST} from "./Constant";
 import LocalStorage from "./LocalStorage";
 import leftArrow from "../img/left-arrow.png";
 import rightArrow from "../img/right-arrow.png";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
+import {POST_TARGET} from "./Constant";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class SalesTargetSetterTab extends Component {
             return;
         }
 
-        fetch(HOST + "target", {
+        fetch(POST_TARGET(), {
             method: 'post', headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({id: this.props.id,
                 target: parseFloat(this.state.newTarget)
