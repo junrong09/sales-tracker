@@ -40,7 +40,7 @@ class SalesOverallTab extends React.Component {
             this.setState({transCount: 0});
             this.setState({memberServed: 0});
         } else {
-            let sales = data.map(obj => obj.value).reduce((acc, val) => acc+val);
+            let sales = data.map(obj => parseFloat(obj.value)).reduce((acc, val) => acc+val);
             this.setState({sales: sales});
             let transCount = (new Set(data.map(obj => obj.txnNum))).size;
             this.setState({transCount: transCount});

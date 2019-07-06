@@ -23,7 +23,7 @@ class SalesTransactionsTab extends React.Component {
         }];
 
     headersL2 = [
-        {Header: 'SKU', accessor: 'itemId', minWidth: 40}, {
+        {Header: 'Item ID', accessor: 'itemId', minWidth: 40}, {
             Header: 'Brand',
             accessor: 'brand',
             minWidth: 50
