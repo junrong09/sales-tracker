@@ -22,7 +22,7 @@ class Login extends React.Component {
                     <Link to="/sales">
                     <FormButton label="Next" onClick={() => {
                         if (this.state.tempId === '' || /\s/.test(this.state.tempId)) {
-                            toastWarning("invalidLogin", "Invalid id");
+                            toastWarning("invalidLogin", "⚠️ Invalid id");
                         } else {
                             this.props.onIdChange(this.state.tempId);
                         }
