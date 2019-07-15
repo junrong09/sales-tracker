@@ -28,8 +28,20 @@ class App extends React.Component {
         fetch(GET_TXN(id), {
             method: 'get'
         })
-            .then(response => response.json())
-            .then(json => json.txn)
+            .then(response => response.text())
+            .then(text => {
+                if (text === "No associated sales found for the day!") {
+                    toastWarning("fetch", "⚠️ No sales for the day");
+                    this.setState({bizDate: FORMAT_DATE(new Date())});
+                    return [];
+                } else {
+                    let json = JSON.parse(text);
+                    let date = json.bizDate.substring(0, 4) + " " + json.bizDate.substring(4, 6)
+                        + " " + json.bizDate.substring(6, 8);
+                    this.setState({bizDate : FORMAT_DATE(new Date(date))});
+                    return json.txn;
+                }
+            })
             .then(transactions => {
                 this.setState({transactions: transactions});
                 console.log("Fetch successful: " + transactions.length + " trans");

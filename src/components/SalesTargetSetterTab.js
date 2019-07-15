@@ -5,7 +5,7 @@ import LocalStorage from "./LocalStorage";
 import leftArrow from "../img/left-arrow.png";
 import rightArrow from "../img/right-arrow.png";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
-import {POST_TARGET} from "./Constant";
+import {FORMAT_DATE, POST_TARGET} from "./Constant";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -63,7 +63,7 @@ class SalesTargetSetterTab extends Component {
             <div className="flex flex-column items-center vh-75 w-100">
                 <div className="flex justify-around items-center w-100 mt2">
                     <input type="image" alt="Prev day navigator" src={leftArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "" : "hidden")} onClick={() => this.onDateChange(-1)}/>
-                    <span className="b sans-serif mid-gray">Target for {this.state.date.toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})}</span>
+                    <span className="b sans-serif mid-gray">Target for {FORMAT_DATE(this.state.date)}</span>
                     <input type="image" alt="Next day navigator" src={rightArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "hidden" : "")}
                            onClick={() => this.onDateChange(1)}/>
                 </div>
