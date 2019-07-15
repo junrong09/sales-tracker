@@ -7,14 +7,15 @@ import NavigationBar from "./components/NavigationBar";
 import LocalStorage from "./components/LocalStorage";
 import logo from "./img/logo.png";
 import 'react-toastify/dist/ReactToastify.css';
-import {toastComponent, toastError} from "./components/Toast";
-import {GET_TXN} from "./components/Constant";
+import {toastComponent, toastError, toastWarning} from "./components/Toast";
+import {FORMAT_DATE, GET_TXN} from "./components/Constant";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             id: LocalStorage.getID(),
+            bizDate: undefined,
             transactions: undefined
         }
     }
@@ -67,7 +68,7 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} onTransactionsFetch={this.onTransactionsFetch}/>}/>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} onTransactionsFetch={this.onTransactionsFetch} bizDate={this.state.bizDate}/>}/>
                                     <Route render={() => <Redirect to="/sales"/>}/>
                                 </Switch>
                             </React.Fragment>

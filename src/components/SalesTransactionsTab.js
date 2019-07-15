@@ -24,8 +24,8 @@ class SalesTransactionsTab extends React.Component {
 
     headersL2 = [
         {Header: 'Item ID', accessor: 'itemId', minWidth: 40}, {
-            Header: 'Brand',
-            accessor: 'brand',
+            Header: 'Item Name',
+            accessor: 'itemName',
             minWidth: 50
         }, {Header: 'Category', accessor: 'category', minWidth: 50}, {
             Header: 'Unit Value',
@@ -42,16 +42,13 @@ class SalesTransactionsTab extends React.Component {
         let formattedData;
         if (typeof this.props.data !== "undefined") {
             console.log("aggr");
+            console.log(this.props.data);
             formattedData = aggregateData(this.props.data);
         }
 
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                })} : Sales Transactions</p>
+                <p className="b sans-serif mid-gray">{this.props.bizDate} : Sales Transactions</p>
                 {typeof this.props.data !== "undefined" &&
                 <div className="flex flex-column items-center w-100 pb4">
                     <ReactTable columns={this.headersL1} data={formattedData} defaultPageSize={formattedData.length > 10 ? 10 : formattedData.length}

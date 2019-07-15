@@ -40,7 +40,7 @@ class SalesOverallTab extends React.Component {
             this.setState({transCount: 0});
             this.setState({memberServed: 0});
         } else {
-            let sales = data.map(obj => parseFloat(obj.value)).reduce((acc, val) => acc+val);
+            let sales = data.map(obj => parseFloat(obj.salesValue)).reduce((acc, val) => acc+val);
             this.setState({sales: sales});
             let transCount = (new Set(data.map(obj => obj.txnNum))).size;
             this.setState({transCount: transCount});
@@ -62,7 +62,7 @@ class SalesOverallTab extends React.Component {
     render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <p className="b sans-serif mid-gray">{new Date().toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"})} : Sales Chart</p>
+                <p className="b sans-serif mid-gray">{this.props.bizDate} : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.state]}>
                         <CartesianGrid stroke="#f5f5f5"/>
@@ -82,9 +82,9 @@ class SalesOverallTab extends React.Component {
                 <p className="b sans-serif mid-gray f5 mt3">Transactions Completed:
                     {this.state.transCount}
                 </p>
-                <p className="b sans-serif mid-gray f5 ma0">Members Served:
-                    {this.state.memberServed}
-                </p>
+                {/*<p className="b sans-serif mid-gray f5 ma0">Members Served:*/}
+                {/*    {this.state.memberServed}*/}
+                {/*</p>*/}
             </div>
         )
     }

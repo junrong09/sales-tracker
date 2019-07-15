@@ -23,12 +23,12 @@ const newTransaction = (lines) => {
 
     lines.forEach((line) => {
        quantity = quantity + parseInt(line.quantity);
-       value = value + parseFloat(line.value);
-       items.push(newLine(line.itemId, line.brand, line.category, line.quantity, line.value));
+       value = value + parseFloat(line.salesValue);
+       items.push(newLine(line.itemId, line.itemDesc, line.categoryType, line.quantity, line.salesValue));
     });
 
     return {
-        txnDate: lines[0].txnDate.slice(0,8),
+        txnDate: lines[0].txnDate.slice(8,10) + ":" + lines[0].txnDate.slice(10,12) + ":" + lines[0].txnDate.slice(12,14),
         txnNum: lines[0].txnNum,
         quantity: parseInt(quantity,10),
         value: SgdFormatter(value),
@@ -37,10 +37,10 @@ const newTransaction = (lines) => {
     }
 };
 
-const newLine = (itemId, brand, category, quantity, value) => {
+const newLine = (itemId, itemName, category, quantity, value) => {
     return {
         itemId: itemId,
-        brand: brand,
+        itemName: itemName,
         category: category,
         unit_value: SgdFormatter(parseFloat(value)/parseInt(quantity, 10)),
         quantity: parseInt(quantity,10),
