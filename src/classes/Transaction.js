@@ -22,16 +22,19 @@ const newTransaction = (lines) => {
     let items = [];
 
     lines.forEach((line) => {
-       quantity = quantity + parseInt(line.quantity);
-       value = value + parseFloat(line.salesValue);
+        line.salesValue = line.salesValue === "null" ? 0 : parseFloat(line.salesValue);
+        line.quantity = parseInt(line.quantity);
+
+       quantity = quantity + line.quantity;
+       value = value + line.salesValue;
        items.push(newLine(line.itemId, line.itemDesc, line.categoryType, line.quantity, line.salesValue));
     });
 
     return {
         txnDate: lines[0].txnDate.slice(8,10) + ":" + lines[0].txnDate.slice(10,12) + ":" + lines[0].txnDate.slice(12,14),
         txnNum: lines[0].txnNum,
-        quantity: parseInt(quantity,10),
-        value: SgdFormatter(value),
+        quantity: quantity,
+        value: sgdFormatter(value),
         member_id: lines[0].member_id,
         lines: items
     }
@@ -42,11 +45,11 @@ const newLine = (itemId, itemName, category, quantity, value) => {
         itemId: itemId,
         itemName: itemName,
         category: category,
-        unit_value: SgdFormatter(parseFloat(value)/parseInt(quantity, 10)),
-        quantity: parseInt(quantity,10),
-        value: SgdFormatter(value)
+        unit_value: sgdFormatter(value/quantity),
+        quantity: quantity,
+        value: sgdFormatter(value)
     }
 };
 
-const SgdFormatter = (num) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'SGD' })
+export const sgdFormatter = (num) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'SGD' })
     .format(num).slice(4);

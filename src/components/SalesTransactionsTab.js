@@ -2,6 +2,7 @@ import React from "react";
 import ReactTable, {ReactTableDefaults} from 'react-table'
 import 'react-table/react-table.css'
 import {aggregateData} from "../classes/Transaction";
+import {FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
 
 class SalesTransactionsTab extends React.Component {
     headersL1 = [
@@ -48,7 +49,7 @@ class SalesTransactionsTab extends React.Component {
 
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <p className="b sans-serif mid-gray">{this.props.bizDate} : Sales Transactions</p>
+                <p className="b sans-serif mid-gray">{typeof this.props.bizDate === "undefined" ? NOW_DATE_FORMATTED() : FORMAT_DATE_LOCALE(this.props.bizDate)} : Sales Transactions</p>
                 {typeof this.props.data !== "undefined" &&
                 <div className="flex flex-column items-center w-100 pb4">
                     <ReactTable columns={this.headersL1} data={formattedData} defaultPageSize={formattedData.length > 10 ? 10 : formattedData.length}

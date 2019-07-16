@@ -30,10 +30,8 @@ export const toastSuccess = (id, msg) => {
 
 const toastInitOrRefresh = (id, msg, initToast) => {
     if (toast.isActive(id)) {
-        console.log("Active");
         toast.update(id, {autoClose: 2000});
     } else {
-        console.log("NActive");
         initToast(id, msg);
     }
 }
