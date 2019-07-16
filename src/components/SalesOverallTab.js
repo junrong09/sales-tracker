@@ -17,7 +17,6 @@ class SalesOverallTab extends React.Component {
         super(props);
         this.state = {
             sales: undefined,
-            target: this.props.curTarget,
             transCount: undefined,
             memberServed: undefined
         }
@@ -63,7 +62,7 @@ class SalesOverallTab extends React.Component {
             <div className="flex flex-column items-center vh-75 w-100">
                 <p className="b sans-serif mid-gray">{typeof this.props.bizDate === "undefined" ? NOW_DATE_FORMATTED() : FORMAT_DATE_LOCALE(this.props.bizDate)} : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
-                    <ComposedChart data={[this.state]}>
+                    <ComposedChart data={[{sales: this.state.sales, target: this.props.curTarget}]}>
                         <CartesianGrid stroke="#f5f5f5"/>
                         <YAxis domain={[0, (num) => this.roundToHundreds(num * 1.15)]}>
                             <Label value="Sales Amount" angle={270} position="insideLeft"/>

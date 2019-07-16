@@ -42,8 +42,6 @@ class SalesTransactionsTab extends React.Component {
     render() {
         let formattedData;
         if (typeof this.props.data !== "undefined") {
-            console.log("aggr");
-            console.log(this.props.data);
             formattedData = aggregateData(this.props.data);
         }
 
