@@ -4,7 +4,7 @@ class LocalStorage {
     static getID = () => LocalStorage.get("savedID") === null ? '' : LocalStorage.get("savedID");
     static removeID = () => LocalStorage.remove("savedID");
 
-    static saveTarget = (id, date, target) => LocalStorage.put("id-" + id + "_date-" + date.toLocaleDateString() + "_target", target);
+    static saveTarget = (id, date, target) => LocalStorage.put("id-" + id + "_date-" + date+ "_target", target);
     static getTarget = (id, date) => {
         let v = LocalStorage.get("id-" + id + "_date-" + date.toLocaleDateString() + "_target");
         return v === null ? 0 : v;
