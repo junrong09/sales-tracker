@@ -10,7 +10,6 @@ import {
     Tooltip,
     YAxis
 } from "recharts";
-import LocalStorage from "./LocalStorage";
 import {FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
 
 class SalesOverallTab extends React.Component {

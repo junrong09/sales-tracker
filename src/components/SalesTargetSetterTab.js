@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
-import LocalStorage from "./LocalStorage";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
-import {FORMAT_DATE, FORMAT_DATE_LOCALE, POST_TARGET, YYYYMMDD} from "./Constant";
+import {FORMAT_DATE, FORMAT_DATE_LOCALE, FORMAT_SHORT_DATE_LOCALE, POST_TARGET, YYYYMMDD} from "./Constant";
 import DateSwitcher from "./DateSwitcher";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            curTarget: this.props.curTarget,
             newTarget: '',
-            bizDate: this.props.bizDate,
-            targetDate: this.props.targetBizDate,
             selectedDate: typeof this.props.bizDate === "undefined" ? YYYYMMDD(new Date()) : this.props.bizDate
-        }
+        };
     }
 
     onTargetChange = (event) => this.setState({newTarget: event.target.value});
@@ -31,13 +27,17 @@ class SalesTargetSetterTab extends Component {
     postTarget = (id, target, date) => {
         target = parseFloat(target);
         fetch(POST_TARGET(), {
-            method: 'post', headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({saId: id,
-                dayTarget: Math.round(target*100) / 100, bizDate: date})})
-            .then(res  => res.text())
+            method: 'post', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                saId: id,
+                dayTarget: Math.round(target * 100) / 100, bizDate: date
+            })
+        })
+            .then(res => res.text())
             .then(res => {
                 console.log(res);
-                this.setState({curTarget: target, targetDate: date});
+                this.props.onCurTargetChange(target);
+                this.props.onTargetBizDateChange(date);
                 toastSuccess("setTarget", "✔️ Target Submitted");
             })
             .catch((err) => {
@@ -59,17 +59,23 @@ class SalesTargetSetterTab extends Component {
         }
     };
 
-    componentDidMount() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.bizDate !== this.props.bizDate)
+            this.setState({selectedDate: typeof this.props.bizDate === "undefined" ? YYYYMMDD(new Date()) : this.props.bizDate});
     }
 
     render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                {typeof this.state.bizDate === "undefined" ?
+                {typeof this.props.bizDate === "undefined" ?
                     <DateSwitcher onDateChange={this.onDateChange} date={this.state.selectedDate}/>
-                    : <p className="b sans-serif mid-gray">Target for {FORMAT_DATE_LOCALE(this.state.bizDate)}</p>
+                    : <p className="b sans-serif mid-gray">Target for {FORMAT_DATE_LOCALE(this.props.bizDate)}</p>
                 }
-                <p>Previous Target ({FORMAT_DATE_LOCALE(this.state.targetDate)}): {this.state.curTarget}</p>
+                <p>Previous Target : {this.props.curTarget} <br/>
+                    {this.props.targetBizDate === '' || this.props.targetBizDate === this.state.selectedDate
+                        ? ""
+                        : "(Submitted for " + FORMAT_SHORT_DATE_LOCALE(this.props.targetBizDate) + ") "}
+                </p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
                     <FormTextBox label="Target" onChange={this.onTargetChange}/>
                     <FormButton label="Submit" onClick={this.onTargetSubmit}/>

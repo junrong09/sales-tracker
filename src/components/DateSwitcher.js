@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import leftArrow from "../img/left-arrow.png";
-import {FORMAT_DATE, FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
+import {FORMAT_DATE, FORMAT_DATE_LOCALE} from "./Constant";
 import rightArrow from "../img/right-arrow.png";
 
 class DateSwitcher extends Component {

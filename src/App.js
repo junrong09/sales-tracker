@@ -38,6 +38,7 @@ class App extends React.Component {
             .then(text => {
                 if (text === "No associated sales found for the day!") {
                     toastWarning("fetch", "⚠️ No sales for the day");
+                    this.setState({bizDate : undefined});
                     return [];
                 } else {
                     let json = JSON.parse(text);
@@ -48,7 +49,6 @@ class App extends React.Component {
             .then(transactions => {
                 this.setState({transactions: transactions});
                 console.log("Fetch successful: " + transactions.length + " trans");
-                console.log(transactions);
             })
             .catch(err => {
                 toastError("fetch", "❌ No connection found");
@@ -96,7 +96,7 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate}/>}/>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
                                     <Route render={() => <Redirect to="/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
