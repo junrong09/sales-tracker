@@ -3,6 +3,7 @@ import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
 import {toastWarning} from "./Toast";
+import {GET_URL, SET_URL} from "./Constant";
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,6 +14,12 @@ class Login extends React.Component {
     }
 
     onTempIdChange = (event) => this.setState({tempId:event.target.value});
+    onApiChange = () => {
+        let newValue = prompt("Please enter API", GET_URL());
+        console.log(newValue);
+        if (newValue !== null)
+            SET_URL(newValue);
+    };
 
     render() {
         return (
@@ -28,6 +35,7 @@ class Login extends React.Component {
                         }
                     }}/>
                     </Link>
+                    <input className="f3 self-end bg-white b--none" type="button" value="⚙️" onClick={this.onApiChange}/>
                 </div>
         )
     }

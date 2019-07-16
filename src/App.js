@@ -26,6 +26,9 @@ class App extends React.Component {
         this.setState({id:value});
         LocalStorage.saveID(value);
     };
+    onCurTargetChange = (value) => this.setState({curTarget: value});
+    onTargetBizDateChange = (value) => this.setState({targetBizDate: value});
+
     onFetch = () => {
         this.onTransactionsFetchID(this.state.id);
         this.onTargetFetchID(this.state.id);
@@ -91,7 +94,7 @@ class App extends React.Component {
                                 <Login onIdChange={this.onIdChange}
                                        onTransactionsFetch={this.onTransactionsFetchID}/>
                                 <Redirect to="/"/>
-                            </React.Fragment>:
+                            </React.Fragment> :
                             // User (logged in)
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
