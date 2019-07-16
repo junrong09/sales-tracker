@@ -2,53 +2,42 @@ import React, {Component} from 'react';
 import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import LocalStorage from "./LocalStorage";
-import leftArrow from "../img/left-arrow.png";
-import rightArrow from "../img/right-arrow.png";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
-import {FORMAT_DATE, POST_TARGET} from "./Constant";
+import {FORMAT_DATE, FORMAT_DATE_LOCALE, POST_TARGET, YYYYMMDD} from "./Constant";
+import DateSwitcher from "./DateSwitcher";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            curTarget: LocalStorage.getTarget(this.props.id, new Date()),
+            curTarget: this.props.curTarget,
             newTarget: '',
-            date: new Date()
+            bizDate: this.props.bizDate,
+            targetDate: this.props.targetBizDate,
+            selectedDate: typeof this.props.bizDate === "undefined" ? YYYYMMDD(new Date()) : this.props.bizDate
         }
     }
 
     onTargetChange = (event) => this.setState({newTarget: event.target.value});
-    onDateChange = (days) => {
-        let d = new Date(this.state.date);
-        d.setDate(this.state.date.getDate() + days);
-
-        let today = new Date();
-        let yest = new Date();
-        yest.setDate(yest.getDate() - 1);
-
-        if (d.toDateString() === today.toDateString() || d.toDateString() === yest.toDateString()) {
-            this.setState({curTarget: LocalStorage.getTarget(this.props.id, d)});
-            this.setState({date: d});
-        }
-    };
 
     onTargetSubmit = () => {
-
-        if (isNaN(this.state.newTarget) || this.state.newTarget === '') {
+        if (isNaN(this.state.newTarget) || /\s/.test(this.state.newTarget) || this.state.newTarget === '') {
             toastWarning("invalidInput", "⚠️ Invalid Input");
             return;
         }
+        this.postTarget(this.props.id, this.state.newTarget, this.state.selectedDate);
+    };
 
+    postTarget = (id, target, date) => {
+        target = parseFloat(target);
         fetch(POST_TARGET(), {
             method: 'post', headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({id: this.props.id,
-                target: parseFloat(this.state.newTarget)
-            , datetime: this.state.date.toISOString()})})
-            .then(res  => res.json())
+            body: JSON.stringify({saId: id,
+                dayTarget: Math.round(target*100) / 100, bizDate: date})})
+            .then(res  => res.text())
             .then(res => {
                 console.log(res);
-                LocalStorage.saveTarget(this.props.id, this.state.date, this.state.newTarget);
-                this.setState({curTarget: this.state.newTarget});
+                this.setState({curTarget: target, targetDate: date});
                 toastSuccess("setTarget", "✔️ Target Submitted");
             })
             .catch((err) => {
@@ -57,17 +46,30 @@ class SalesTargetSetterTab extends Component {
             });
     };
 
-    render() {
+    onDateChange = (days) => {
+        let d = FORMAT_DATE(this.state.selectedDate);
+        d.setDate(d.getDate() + days);
 
+        let today = new Date();
+        let yest = new Date();
+        yest.setDate(yest.getDate() - 1);
+
+        if (d.toDateString() === today.toDateString() || d.toDateString() === yest.toDateString()) {
+            this.setState({selectedDate: YYYYMMDD(d)});
+        }
+    };
+
+    componentDidMount() {
+    }
+
+    render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <div className="flex justify-around items-center w-100 mt2">
-                    <input type="image" alt="Prev day navigator" src={leftArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "" : "hidden")} onClick={() => this.onDateChange(-1)}/>
-                    <span className="b sans-serif mid-gray">Target for {FORMAT_DATE(this.state.date)}</span>
-                    <input type="image" alt="Next day navigator" src={rightArrow} className={"h2 w2 drop-shadow " + (this.state.date.toDateString() === new Date().toDateString() ? "hidden" : "")}
-                           onClick={() => this.onDateChange(1)}/>
-                </div>
-                <p>Current Target: {this.state.curTarget === null ? 0 : this.state.curTarget}</p>
+                {typeof this.state.bizDate === "undefined" ?
+                    <DateSwitcher onDateChange={this.onDateChange} date={this.state.selectedDate}/>
+                    : <p className="b sans-serif mid-gray">Target for {FORMAT_DATE_LOCALE(this.state.bizDate)}</p>
+                }
+                <p>Previous Target ({FORMAT_DATE_LOCALE(this.state.targetDate)}): {this.state.curTarget}</p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
                     <FormTextBox label="Target" onChange={this.onTargetChange}/>
                     <FormButton label="Submit" onClick={this.onTargetSubmit}/>

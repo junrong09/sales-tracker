@@ -11,13 +11,14 @@ import {
     YAxis
 } from "recharts";
 import LocalStorage from "./LocalStorage";
+import {FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
 
 class SalesOverallTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             sales: undefined,
-            target: LocalStorage.getTarget(this.props.id, new Date()),
+            target: this.props.curTarget,
             transCount: undefined,
             memberServed: undefined
         }
@@ -40,14 +41,13 @@ class SalesOverallTab extends React.Component {
             this.setState({transCount: 0});
             this.setState({memberServed: 0});
         } else {
-            let sales = data.map(obj => parseFloat(obj.salesValue)).reduce((acc, val) => acc+val);
-            this.setState({sales: sales});
+            let sales = data.map(obj => parseFloat(obj.salesValue === "null" ? 0 : obj.salesValue)).reduce((acc, val) => acc+val);
+            this.setState({sales: Math.round(sales*100)/100});
             let transCount = (new Set(data.map(obj => obj.txnNum))).size;
             this.setState({transCount: transCount});
             let memberServed = (new Set(data.map(obj => obj.memberNum))).size;
             this.setState({memberServed: memberServed});
         }
-
     };
 
     componentDidMount() {
@@ -62,7 +62,7 @@ class SalesOverallTab extends React.Component {
     render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <p className="b sans-serif mid-gray">{this.props.bizDate} : Sales Chart</p>
+                <p className="b sans-serif mid-gray">{typeof this.props.bizDate === "undefined" ? NOW_DATE_FORMATTED() : FORMAT_DATE_LOCALE(this.props.bizDate)} : Sales Chart</p>
                 <ResponsiveContainer width="90%" height="60%" className="mt2">
                     <ComposedChart data={[this.state]}>
                         <CartesianGrid stroke="#f5f5f5"/>
@@ -79,8 +79,7 @@ class SalesOverallTab extends React.Component {
                         </Bar>
                     </ComposedChart>
                 </ResponsiveContainer>
-                <p className="b sans-serif mid-gray f5 mt3">Transactions Completed:
-                    {this.state.transCount}
+                <p className="b sans-serif mid-gray f5 mt3">Transactions Completed: {this.state.transCount}
                 </p>
                 {/*<p className="b sans-serif mid-gray f5 ma0">Members Served:*/}
                 {/*    {this.state.memberServed}*/}

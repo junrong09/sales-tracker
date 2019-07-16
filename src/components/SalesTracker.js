@@ -14,20 +14,21 @@ class SalesTracker extends React.Component {
 
     onTabChange = (newTab) => {
         this.setState({tab: newTab});
-        this.props.onTransactionsFetch();
+        this.props.onFetch();
+
     };
 
     componentDidMount() {
-        this.props.onTransactionsFetch();
+        this.props.onFetch();
     }
 
     render() {
         return (
             <div className="flex flex-column items-center w-100 mw6">
                 <TabBar onTabChange={this.onTabChange} tab={this.state.tab}/>
-                {this.state.tab === "overall" && <SalesOverallTab data={this.props.transactions} id={this.props.id} bizDate={this.props.bizDate}/>}
+                {this.state.tab === "overall" && <SalesOverallTab data={this.props.transactions} id={this.props.id} bizDate={this.props.bizDate} curTarget={this.props.bizDate === this.props.targetBizDate ? this.props.curTarget : 0}/>}
                 {this.state.tab === "transactions" && <SalesTransactionsTab data={this.props.transactions} bizDate={this.props.bizDate}/>}
-                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.props.transactions} id={this.props.id}/>}
+                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.props.transactions} id={this.props.id} bizDate={this.props.bizDate} targetBizDate={this.props.targetBizDate} curTarget={this.props.curTarget}/>}
             </div>
         )
     }

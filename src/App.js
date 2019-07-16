@@ -8,7 +8,7 @@ import LocalStorage from "./components/LocalStorage";
 import logo from "./img/logo.png";
 import 'react-toastify/dist/ReactToastify.css';
 import {toastComponent, toastError, toastWarning} from "./components/Toast";
-import {FORMAT_DATE, GET_TXN} from "./components/Constant";
+import {GET_TARGET, GET_TXN} from "./components/Constant";
 
 class App extends React.Component {
     constructor(props) {
@@ -16,13 +16,19 @@ class App extends React.Component {
         this.state = {
             id: LocalStorage.getID(),
             bizDate: undefined,
-            transactions: undefined
+            transactions: undefined,
+            curTarget : '',
+            targetBizDate: ''
         }
     }
 
     onIdChange = (value) => {
         this.setState({id:value});
         LocalStorage.saveID(value);
+    };
+    onFetch = () => {
+        this.onTransactionsFetchID(this.state.id);
+        this.onTargetFetchID(this.state.id);
     };
     onTransactionsFetchID = (id) => {
         fetch(GET_TXN(id), {
@@ -32,13 +38,10 @@ class App extends React.Component {
             .then(text => {
                 if (text === "No associated sales found for the day!") {
                     toastWarning("fetch", "⚠️ No sales for the day");
-                    this.setState({bizDate: FORMAT_DATE(new Date())});
                     return [];
                 } else {
                     let json = JSON.parse(text);
-                    let date = json.bizDate.substring(0, 4) + " " + json.bizDate.substring(4, 6)
-                        + " " + json.bizDate.substring(6, 8);
-                    this.setState({bizDate : FORMAT_DATE(new Date(date))});
+                    this.setState({bizDate : json.bizDate});
                     return json.txn;
                 }
             })
@@ -52,10 +55,23 @@ class App extends React.Component {
                 console.log(err);
             });
     };
-    onTransactionsFetch = () => this.onTransactionsFetchID(this.state.id);
+    onTargetFetchID = (id) => {
+        fetch(GET_TARGET(id))
+            .then(res => res.text())
+            .then(text => {
+                if (text === "Sales target tot set!")
+                    this.setState({curTarget: "~"});
+                else {
+                    let json = JSON.parse(text);
+                    this.setState({curTarget: json.dayTarget, targetBizDate: json.bizDate});
+                }
+            })
+    };
     onLogout = () => {
         LocalStorage.removeID();
-        this.setState({id: '', transactions: undefined});
+        this.setState({
+            id: '', bizDate: undefined, transactions: undefined, curTarget : '', targetBizDate: ''
+        });
     };
 
     render() {
@@ -80,7 +96,7 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} onTransactionsFetch={this.onTransactionsFetch} bizDate={this.state.bizDate}/>}/>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate}/>}/>
                                     <Route render={() => <Redirect to="/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
