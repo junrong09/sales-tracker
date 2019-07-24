@@ -3,15 +3,17 @@ import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
 import {toastWarning} from "./Toast";
-import {GET_URL, SET_URL, storeOptions} from "./Constant";
+import {GET_URL, KAFKA_URL, SERVEO_URL, SET_URL, storeOptions} from "./Constant";
 import FormDropDown from "./FormDropDown";
+import Popup from "reactjs-popup";
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tempId: '',
-            tempStoreId: storeOptions.entries().next().value[1][0]
+            tempStoreId: storeOptions.entries().next().value[1][0],
+            tempAPI: GET_URL()
         }
     }
 
@@ -25,6 +27,9 @@ class Login extends React.Component {
         if (newValue !== null)
             SET_URL(newValue);
     };
+    onTempApiChange = (event) => this.onTempApiTextChange(event.target.value);
+    onTempApiTextChange = (text) => this.setState({tempAPI: text});
+    onTempApiSave = () => SET_URL(this.state.tempAPI);
 
     render() {
         return (
@@ -42,7 +47,26 @@ class Login extends React.Component {
                         }
                     }}/>
                     </Link>
-                    <input className="f3 self-end bg-white b--none" type="button" value="⚙️" onClick={this.onApiChange}/>
+                    <Popup modal
+                        trigger={<input className="f3 self-end bg-white b--none" type="button" value="⚙️"/>}>
+                        {close => (
+                            <div className="flex flex-column content-center shadow-3">
+                                <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>
+                                <div className="flex flex-wrap justify-center">
+                                    <FormButton label="x-sin" onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
+                                    <FormButton label="Serveo" onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>
+                                    <FormButton label="Save" onClick={() => {
+                                        this.onTempApiSave();
+                                        close();
+                                    }}/>
+                                    <FormButton label="Close" onClick={() => {
+                                        this.setState({tempAPI: GET_URL()});
+                                        close();
+                                    }}/>
+                                </div>
+                            </div>
+                        )}
+                    </Popup>
                 </div>
         )
     }

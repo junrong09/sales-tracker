@@ -1,15 +1,16 @@
 // export const GET_TXN = id => MOCK_GET_TXN(id);
-export const GET_TXN = id => KAFKA_V1_GET_TXN(id);
-export const POST_TARGET = () => KAFKA_V1_POST_TARGET();
-export const GET_TARGET = (id) => KAFKA_V1_GET_TARGET(id);
-export const SET_URL = (url) => KAFKA_V1_URL = url;
-export const GET_URL = () => KAFKA_V1_URL;
+export const GET_TXN = id => API_URL_GET_TXN(id);
+export const POST_TARGET = () => API_URL_POST_TARGET();
+export const GET_TARGET = (id) => API_URL_GET_TARGET(id);
+export const SET_URL = (url) => API_IN_USE = url;
+export const GET_URL = () => API_IN_USE;
 
-var KAFKA_V1_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
-const KAFKA_V1_GET_TXN = id => KAFKA_V1_URL + "/transactions/" + id;
-const KAFKA_V1_POST_TARGET = () => KAFKA_V1_URL + "/target";
-const KAFKA_V1_GET_TARGET = id => KAFKA_V1_URL + "/target/" + id;
-
+export const KAFKA_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
+export const SERVEO_URL = "https://api09.serveo.net/outdo-services/v1";
+var API_IN_USE = KAFKA_URL;
+const API_URL_GET_TXN = id => API_IN_USE + "/transactions/" + id;
+const API_URL_POST_TARGET = () => API_IN_USE + "/target";
+const API_URL_GET_TARGET = id => API_IN_USE + "/target/" + id;
 
 // const HOST = "http://10.176.19.252:8080/";
 // const MOCK_GET_TXN = id => HOST + "transactions?id=" + id;
