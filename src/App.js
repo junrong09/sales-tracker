@@ -15,6 +15,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             id: LocalStorage.getID(),
+            storeId: '',
             bizDate: undefined,
             transactions: undefined,
             curTarget : '',
@@ -25,6 +26,9 @@ class App extends React.Component {
     onIdChange = (value) => {
         this.setState({id:value});
         LocalStorage.saveID(value);
+    };
+    onStoreIdChange = (value) => {
+        this.setState({storeId:value});
     };
     onCurTargetChange = (value) => this.setState({curTarget: value});
     onTargetBizDateChange = (value) => this.setState({targetBizDate: value});
@@ -91,7 +95,7 @@ class App extends React.Component {
                         this.state.id === '' || /\s/.test(this.state.id) ?
                             // Non-user
                             <React.Fragment>
-                                <Login onIdChange={this.onIdChange}
+                                <Login onIdChange={this.onIdChange} onStoreIdChange={this.onStoreIdChange}
                                        onTransactionsFetch={this.onTransactionsFetchID}/>
                                 <Redirect to="/"/>
                             </React.Fragment> :

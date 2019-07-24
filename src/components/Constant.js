@@ -41,3 +41,8 @@ export const YYYYMMDD = (date) => {
         (dd > 9 ? '' : '0') + dd
     ].join('');
 };
+
+export const storeOptions = new Map();
+storeOptions.set("Sydney", [25]);
+storeOptions.set("Cairns", [47]);
+storeOptions.set("San Francisco", [1010, 1011, 1012, 1013]);
