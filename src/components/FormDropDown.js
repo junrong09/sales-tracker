@@ -3,7 +3,7 @@ import React from "react";
 const FormDropDown = ({label, options, onChange}) => {
     const ranNum = Math.floor(Math.random() * 100000);
     const optionTags = [];
-    for (let [key, value] of options) {
+    for (let [key] of options) {
         optionTags.push(
             <option value={key} key={key} className="sans-serif mid-gray">{key}</option>
         )

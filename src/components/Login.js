@@ -17,9 +17,9 @@ class Login extends React.Component {
         }
     }
 
-    onTempIdChange = (event) => this.setState({tempId:event.target.value});
+    onTempIdChange = (event) => this.setState({tempId: event.target.value});
     onTempStoreIdChange = (event) => {
-        this.setState({tempStoreId:storeOptions.get(event.target.selectedOptions[0].value)[0]});
+        this.setState({tempStoreId: storeOptions.get(event.target.selectedOptions[0].value)[0]});
     };
     onApiChange = () => {
         let newValue = prompt("Please enter API", GET_URL());
@@ -33,11 +33,11 @@ class Login extends React.Component {
 
     render() {
         return (
-                <div className="flex flex-column w-90 mw6 mv5 mv6-ns pv4 ph3 br2 shadow-3">
-                    <span className="f4 f3-ns fw5 mb3 sans-serif mid-gray">Login</span>
-                    <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
-                    <FormDropDown label="Store" options={storeOptions} onChange={this.onTempStoreIdChange}/>
-                    <Link to="/sales">
+            <div className="flex flex-column w-90 mw6 mv5 mv6-ns pv4 ph3 br2 shadow-3">
+                <span className="f4 f3-ns fw5 mb3 sans-serif mid-gray">Login</span>
+                <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
+                <FormDropDown label="Store" options={storeOptions} onChange={this.onTempStoreIdChange}/>
+                <Link to="/sales">
                     <FormButton label="Next" onClick={() => {
                         if (this.state.tempId === '' || /\s/.test(this.state.tempId)) {
                             toastWarning("invalidLogin", "⚠️ Invalid id");
@@ -46,28 +46,36 @@ class Login extends React.Component {
                             this.props.onStoreIdChange(this.state.tempStoreId);
                         }
                     }}/>
-                    </Link>
-                    <Popup modal
-                        trigger={<input className="f3 self-end bg-white b--none" type="button" value="⚙️"/>}>
-                        {close => (
-                            <div className="flex flex-column content-center shadow-3">
-                                <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>
-                                <div className="flex flex-wrap justify-center">
-                                    <FormButton label="x-sin" onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
-                                    <FormButton label="Serveo" onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>
-                                    <FormButton label="Save" onClick={() => {
-                                        this.onTempApiSave();
-                                        close();
-                                    }}/>
-                                    <FormButton label="Close" onClick={() => {
-                                        this.setState({tempAPI: GET_URL()});
-                                        close();
-                                    }}/>
-                                </div>
+                </Link>
+                <Popup modal className=""
+                       trigger={<input className="w2 h2 f4 self-end bg-transparent bn grow" type="button" value="⚙️"/>}>
+                    {close => (
+                        <div className="flex flex-column content-center">
+                            <div className="flex justify-end">
+                                <input type="button"
+                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
+                                       onClick={() => {
+                                           this.onTempApiSave();
+                                           close();
+                                       }} value="💾"/>
+                                <input type="button"
+                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
+                                       onClick={() => {
+                                           this.setState({tempAPI: GET_URL()});
+                                           close();
+                                       }} value="❌"/>
                             </div>
-                        )}
-                    </Popup>
-                </div>
+                            <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>
+                            <div className="flex flex-wrap justify-center">
+                                <FormButton label="x-sin" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
+                                <FormButton label="serveo" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>
+                            </div>
+                        </div>
+                    )}
+                </Popup>
+            </div>
         )
     }
 }

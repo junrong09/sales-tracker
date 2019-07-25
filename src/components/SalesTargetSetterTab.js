@@ -74,7 +74,7 @@ class SalesTargetSetterTab extends Component {
                 <p>Previous Target : {this.props.curTarget} <br/>
                     {this.props.targetBizDate === '' || this.props.targetBizDate === this.state.selectedDate
                         ? ""
-                        : "(Submitted for " + FORMAT_SHORT_DATE_LOCALE(this.props.targetBizDate) + ") "}
+                        : "(Last recorded, " + FORMAT_SHORT_DATE_LOCALE(this.props.targetBizDate) + ") "}
                 </p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
                     <FormTextBox label="Target" onChange={this.onTargetChange}/>
