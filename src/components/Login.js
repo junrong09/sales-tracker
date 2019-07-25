@@ -21,12 +21,6 @@ class Login extends React.Component {
     onTempStoreIdChange = (event) => {
         this.setState({tempStoreId: storeOptions.get(event.target.selectedOptions[0].value)[0]});
     };
-    onApiChange = () => {
-        let newValue = prompt("Please enter API", GET_URL());
-        console.log(newValue);
-        if (newValue !== null)
-            SET_URL(newValue);
-    };
     onTempApiChange = (event) => this.onTempApiTextChange(event.target.value);
     onTempApiTextChange = (text) => this.setState({tempAPI: text});
     onTempApiSave = () => SET_URL(this.state.tempAPI);
