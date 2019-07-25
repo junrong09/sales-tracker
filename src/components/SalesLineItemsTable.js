@@ -13,11 +13,11 @@ class SalesLineItemsTable extends Component {
 
         return (
             <div className="flex justify-around items-center h3 bg-washed-blue bt bb b--light-gray" key={itemId + quantity}>
-                <div className="flex flex-column items-start w-70 ph2">
+                <div className="flex flex-column items-start w-70 w-80-ns ph2">
                     <span className="f5 b">{itemName}</span>
                     <span className="f6">{"$" + unit_value}</span>
                 </div>
-                <div className="flex flex-column items-center w-30">
+                <div className="flex flex-column items-center w-30 w-20-ns">
                     <span className="f6 b">{quantity}</span>
                     <span className="f6 bg-mid-gray br3 white b ph1 pv1 w3">{"$" + value}</span>
                 </div>

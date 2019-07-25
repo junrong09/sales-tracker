@@ -14,7 +14,7 @@ const FormDropDown = ({label, options, onChange}) => {
             <label className="f5 sans-serif mid-gray tl" htmlFor={label + ranNum}>
                 {label}
             </label>
-            <select name={label} id={label + ranNum} className="sans-serif mid-gray mw5 h2 bl-0 br-0 bt-0 pl2 hover-bg-washed-blue grow" onChange={onChange}>
+            <select name={label} id={label + ranNum} className="sans-serif mid-gray mw6 h2 bl-0 br-0 bt-0 pl2 hover-bg-washed-blue grow" onChange={onChange}>
                 {optionTags}
             </select>
         </div>
