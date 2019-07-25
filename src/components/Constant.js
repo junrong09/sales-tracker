@@ -1,13 +1,18 @@
 // export const GET_TXN = id => MOCK_GET_TXN(id);
+import LocalStorage from "./LocalStorage";
+
 export const GET_TXN = id => API_URL_GET_TXN(id);
 export const POST_TARGET = () => API_URL_POST_TARGET();
 export const GET_TARGET = (id) => API_URL_GET_TARGET(id);
-export const SET_URL = (url) => API_IN_USE = url;
+export const SET_URL = (url) => {
+    API_IN_USE = url;
+    LocalStorage.saveAPI(url);
+};
 export const GET_URL = () => API_IN_USE;
 
 export const KAFKA_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
 export const SERVEO_URL = "https://api09.serveo.net/outdo-services/v1";
-var API_IN_USE = KAFKA_URL;
+var API_IN_USE = LocalStorage.getAPI() === '' ? KAFKA_URL : LocalStorage.getAPI();
 const API_URL_GET_TXN = id => API_IN_USE + "/transactions/" + id;
 const API_URL_POST_TARGET = () => API_IN_USE + "/target";
 const API_URL_GET_TARGET = id => API_IN_USE + "/target/" + id;

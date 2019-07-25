@@ -4,7 +4,9 @@ class LocalStorage {
     static getID = () => LocalStorage.get("savedID") === null ? '' : LocalStorage.get("savedID");
     static removeID = () => LocalStorage.remove("savedID");
 
-    
+    static saveAPI = (api) => LocalStorage.put("savedAPI", api);
+    static getAPI = () => LocalStorage.get("savedAPI") === null ? '' : LocalStorage.get("savedAPI");
+    static removeAPI = () => LocalStorage.remove("savedAPI");
 
     static put = (key, value) => {
         return window.localStorage.setItem(key, value);
