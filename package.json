@@ -7,7 +7,9 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-virtualized": "^9.21.1",
+    "react-table": "^6.10.0",
+    "react-toastify": "^5.3.2",
+    "reactjs-popup": "^1.4.1",
     "recharts": "^1.6.2",
     "tachyons": "^4.11.1"
   },
@@ -15,7 +17,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +36,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }

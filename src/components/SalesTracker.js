@@ -3,44 +3,32 @@ import TabBar from "./TabBar";
 import SalesOverallTab from "./SalesOverallTab";
 import SalesTransactionsTab from "./SalesTransactionsTab";
 import SalesTargetSetterTab from "./SalesTargetSetterTab";
-import {HOST} from "./Constant";
 
 class SalesTracker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: {},
-            // TODO: Set back to overall
             tab: "overall"
         }
     }
 
     onTabChange = (newTab) => {
         this.setState({tab: newTab});
-        this.fetchUserProfile();
-    };
+        this.props.onFetch();
 
-    fetchUserProfile = () => {
-        fetch(HOST + "salesprofile?user=" + this.props.id, {
-            method: 'get'})
-            .then(raw  => raw.json())
-            .then(data => {
-                this.setState({data: data});
-            })
-            .catch(console.log);
     };
 
     componentDidMount() {
-        this.fetchUserProfile();
+        this.props.onFetch();
     }
 
     render() {
         return (
-            <div className="flex flex-column items-center vh-75 w-100 mw6">
+            <div className="flex flex-column items-center w-100 mw7">
                 <TabBar onTabChange={this.onTabChange} tab={this.state.tab}/>
-                {this.state.tab === "overall" && <SalesOverallTab data={this.state.data}/>}
-                {this.state.tab === "transactions" && <SalesTransactionsTab data={this.state.data}/>}
-                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.state.data} fetchUserProfile={this.fetchUserProfile}/>}
+                {this.state.tab === "overall" && <SalesOverallTab data={this.props.transactions} id={this.props.id} bizDate={this.props.bizDate} curTarget={this.props.bizDate === this.props.targetBizDate ? this.props.curTarget : 0}/>}
+                {this.state.tab === "transactions" && <SalesTransactionsTab data={this.props.transactions} bizDate={this.props.bizDate}/>}
+                {this.state.tab === "targetSetter" && <SalesTargetSetterTab data={this.props.transactions} id={this.props.id} bizDate={this.props.bizDate} targetBizDate={this.props.targetBizDate} curTarget={this.props.curTarget} onCurTargetChange={this.props.onCurTargetChange} onTargetBizDateChange={this.props.onTargetBizDateChange}/>}
             </div>
         )
     }

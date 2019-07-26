@@ -1,42 +1,50 @@
 import React from "react";
-import {Column, Table} from "react-virtualized";
-import 'react-virtualized/styles.css';
+import ReactTable, {ReactTableDefaults} from 'react-table'
+import 'react-table/react-table.css'
+import {aggregateData} from "../classes/Transaction";
+import {FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
+import SalesLineItemsTable from "./SalesLineItemsTable";
 
 class SalesTransactionsTab extends React.Component {
-    render() {
-        let isPropDefined = false;
-        if (typeof this.props.data.transactions !== "undefined") {
-            isPropDefined = true;
-            this.props.data.transactions.forEach(function(tran) {
-                tran.time = tran.hour.toString() + ":" + tran.min.toString();
-            });
-        } else {
+    headersL1 = [
+        {Header: 'Time', accessor: 'txnDate', minWidth: 50},
+        {Header: 'TID', accessor: 'txnNum', minWidth: 50},
+        {Header: 'Qty', accessor: 'quantity', minWidth: 40},
+        {Header: '$', accessor: 'value', minWidth: 50}
+    ];
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.props.date !== nextProps.data;
+    }
+
+    render() {
+        let formattedData;
+        if (typeof this.props.data !== "undefined") {
+            formattedData = aggregateData(this.props.data);
         }
 
         return (
-            <React.Fragment>
-                <p className="b sans-serif mid-gray">24 Jun 2019 : Sales Transactions</p>
-                {isPropDefined &&
-                <Table
-                    width={300}
-                    height={400}
-                    headerHeight={30}
-                    rowHeight={25}
-                    rowCount={this.props.data.transactions.length}
-                    rowGetter={({index}) => this.props.data.transactions[index]}
-                    className=""
-                    headerClassName="mid-gray"
-                    rowClassName="bb b--moon-gray"
-                    gridClassName="mid-gray"
-                >
-                    <Column width={200} label='SKU' dataKey='sku'/>
-                    <Column width={200} label='Value' dataKey='value'/>
-                    <Column width={200} label='Time' dataKey='time'/>
-                </Table>
+            <div className="flex flex-column items-center vh-75 w-100">
+                <p className="b sans-serif mid-gray">{typeof this.props.bizDate === "undefined" ? NOW_DATE_FORMATTED() : FORMAT_DATE_LOCALE(this.props.bizDate)} :
+                    Sales Transactions</p>
+                {typeof this.props.data !== "undefined" &&
+                <div className="flex flex-column items-center w-100 pb4 sans-serif">
+                    <ReactTable columns={this.headersL1} data={formattedData}
+                                defaultPageSize={formattedData.length > 10 ? 10 : formattedData.length}
+                                className="w-90 pb2 f5 mid-gray" showPageJump={false}
+                                showPagination={formattedData.length > 10}
+                                column={{...ReactTableDefaults.column, headerClassName: "b"}}
+                                SubComponent={row => {
+                                    return (
+                                        <div className="ma2">
+                                            <SalesLineItemsTable data={row.original.lines}/>
+                                        </div>
+                                    );
+                                }}
+                    />
+                </div>
                 }
-
-            </React.Fragment>
+            </div>
         )
     }
 }

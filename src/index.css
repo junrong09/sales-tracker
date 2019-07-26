@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.hidden {
+  visibility: hidden;
+}
+
+.drop-shadow {
+  filter: drop-shadow(2px 2px 3px rgba( 0, 0, 0, 0.2));
+}
