@@ -9,7 +9,7 @@ class SalesLineItemsTable extends Component {
     };
 
     lineRow = (line) => {
-        const {category, itemId, itemName, quantity, unit_value, value} = line;
+        const {itemId, itemName, quantity, unit_value, value} = line;
 
         return (
             <div className="flex justify-around items-center h3 bg-washed-blue bt bb b--light-gray" key={itemId + quantity}>
