@@ -4,7 +4,6 @@ import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
 import {toastWarning} from "./Toast";
 import {GET_URL, KAFKA_URL, SERVEO_URL, SET_URL, storeOptions} from "./Constant";
-import FormDropDown from "./FormDropDown";
 import Popup from "reactjs-popup";
 
 class Login extends React.Component {
