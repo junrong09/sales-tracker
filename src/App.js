@@ -97,14 +97,14 @@ class App extends React.Component {
                             <React.Fragment>
                                 <Login onIdChange={this.onIdChange} onStoreIdChange={this.onStoreIdChange}
                                        onTransactionsFetch={this.onTransactionsFetchID}/>
-                                <Redirect to="/"/>
+                                <Redirect to="/sales-tracker/"/>
                             </React.Fragment> :
                             // User (logged in)
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
-                                    <Route render={() => <Redirect to="/sales"/>}/>
+                                    <Route path={'/sales-tracker/sales'} render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
+                                    <Route render={() => <Redirect to="/sales-tracker/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
                     }
