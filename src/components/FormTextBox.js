@@ -3,7 +3,7 @@ import React from 'react';
 const FormTextBox = ({label, onChange, defaultText}) => {
     const ranNum = Math.floor(Math.random() * 100000);
     return (
-        <div className="flex flex-column mh3 mv1">
+        <div className="flex flex-column mh3 mv2">
             <label className="f5 sans-serif mid-gray tl" htmlFor={label + ranNum}>
                 {label}
             </label>

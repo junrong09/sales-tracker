@@ -8,9 +8,11 @@ import SalesLineItemsTable from "./SalesLineItemsTable";
 class SalesTransactionsTab extends React.Component {
     headersL1 = [
         {Header: 'Time', accessor: 'txnDate', minWidth: 50},
-        {Header: 'TID', accessor: 'txnNum', minWidth: 50},
-        {Header: 'Qty', accessor: 'quantity', minWidth: 40},
-        {Header: '$', accessor: 'value', minWidth: 50}
+        {Header: 'Txn#', accessor: 'txnNum', minWidth: 50},
+        {Header: 'Unit', accessor: 'quantity', minWidth: 40},
+        {Header: '$ (Local)', accessor: 'value', minWidth: 50, sortMethod: (a,b) => {
+            return parseFloat(a.replace(",","")) - parseFloat(b.replace(",",""));
+        }}
     ];
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {

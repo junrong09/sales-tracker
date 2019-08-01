@@ -10,7 +10,8 @@ export const SET_URL = (url) => {
 };
 export const GET_URL = () => API_IN_USE;
 
-export const KAFKA_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
+export const KAFKA_URL = "https://esbsit.dfs.com:5555/rest/DFS/demo";
+// export const KAFKA_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
 export const SERVEO_URL = "https://api09.serveo.net/outdo-services/v1";
 var API_IN_USE = LocalStorage.getAPI() === '' ? KAFKA_URL : LocalStorage.getAPI();
 const API_URL_GET_TXN = id => API_IN_USE + "/transactions/" + id;
