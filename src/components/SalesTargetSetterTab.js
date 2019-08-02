@@ -77,7 +77,7 @@ class SalesTargetSetterTab extends Component {
                         : "(Last recorded, " + FORMAT_SHORT_DATE_LOCALE(this.props.targetBizDate) + ") "}
                 </p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
-                    <FormTextBox label="Target" onChange={this.onTargetChange}/>
+                    <FormTextBox label="Target" onChange={this.onTargetChange} placeholder="Set/Change day sales target"/>
                     <FormButton label="Submit" onClick={this.onTargetSubmit}/>
                 </div>
             </div>
