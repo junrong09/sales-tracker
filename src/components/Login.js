@@ -3,8 +3,7 @@ import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
 import {toastWarning} from "./Toast";
-import {GET_URL, KAFKA_URL, SERVEO_URL, SET_URL, storeOptions} from "./Constant";
-import Popup from "reactjs-popup";
+import {GET_URL, SET_URL, storeOptions} from "./Constant";
 
 class Login extends React.Component {
     constructor(props) {

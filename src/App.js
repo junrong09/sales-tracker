@@ -107,7 +107,7 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavigationBar id={this.state.id} userName={this.state.userName} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path={'/sales-tracker/sales'} render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
+                                    <Route path={'/sales-tracker/sales'} render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} currency={this.state.currency} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
                                     <Route render={() => <Redirect to="/sales-tracker/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
