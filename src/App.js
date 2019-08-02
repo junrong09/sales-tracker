@@ -19,7 +19,9 @@ class App extends React.Component {
             bizDate: undefined,
             transactions: undefined,
             curTarget : '',
-            targetBizDate: ''
+            targetBizDate: '',
+            userName: null,
+            currency: null
         }
     }
 
@@ -50,6 +52,8 @@ class App extends React.Component {
                 } else {
                     let json = JSON.parse(text);
                     this.setState({bizDate : json.bizDate});
+                    this.setState({userName: json.employeeName});
+                    this.setState({currency: json.currency});
                     return json.txn;
                 }
             })
@@ -101,9 +105,9 @@ class App extends React.Component {
                             </React.Fragment> :
                             // User (logged in)
                             <React.Fragment>
-                                <NavigationBar id={this.state.id} onLogout={this.onLogout}/>
+                                <NavigationBar id={this.state.id} userName={this.state.userName} onLogout={this.onLogout}/>
                                 <Switch>
-                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
+                                    <Route path='/sales' render={() => <SalesTracker id={this.state.id} transactions={this.state.transactions} currency={this.state.currency} curTarget={this.state.curTarget} onFetch={this.onFetch} bizDate={this.state.bizDate} targetBizDate={this.state.targetBizDate} onCurTargetChange={this.onCurTargetChange} onTargetBizDateChange={this.onTargetBizDateChange}/>}/>
                                     <Route render={() => <Redirect to="/sales"/>}/>
                                 </Switch>
                             </React.Fragment>
