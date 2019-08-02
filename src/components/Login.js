@@ -3,7 +3,17 @@ import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {Link} from "react-router-dom";
 import {toastWarning} from "./Toast";
-import {GET_URL, SET_URL, storeOptions} from "./Constant";
+import {
+    API_DFS_URL,
+    DEV_API_DFS_URL,
+    ESB_DFS_URL,
+    GET_URL,
+    KAFKA_URL,
+    SET_URL,
+    STAGING_API_DFS_URL,
+    storeOptions
+} from "./Constant";
+import Popup from "reactjs-popup";
 
 class Login extends React.Component {
     constructor(props) {
@@ -39,34 +49,41 @@ class Login extends React.Component {
                         }
                     }}/>
                 </Link>
-                {/*<Popup modal className=""*/}
-                {/*       trigger={<input className="w2 h2 f4 self-end bg-transparent bn grow" type="button" value="⚙️"/>}>*/}
-                {/*    {close => (*/}
-                {/*        <div className="flex flex-column content-center">*/}
-                {/*            <div className="flex justify-end">*/}
-                {/*                <input type="button"*/}
-                {/*                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"*/}
-                {/*                       onClick={() => {*/}
-                {/*                           this.onTempApiSave();*/}
-                {/*                           close();*/}
-                {/*                       }} value="💾"/>*/}
-                {/*                <input type="button"*/}
-                {/*                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"*/}
-                {/*                       onClick={() => {*/}
-                {/*                           this.setState({tempAPI: GET_URL()});*/}
-                {/*                           close();*/}
-                {/*                       }} value="❌"/>*/}
-                {/*            </div>*/}
-                {/*            <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>*/}
-                {/*            <div className="flex flex-wrap justify-center">*/}
-                {/*                <FormButton label="Esbsit" className="ma1"*/}
-                {/*                            onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>*/}
-                {/*                <FormButton label="serveo" className="ma1"*/}
-                {/*                            onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    )}*/}
-                {/*</Popup>*/}
+                <Popup modal className=""
+                       trigger={<input className="w2 h2 f4 self-end bg-transparent bn grow hide" type="button" value="⚙️"/>}>
+                    {close => {
+                        return (
+                        <div className="flex flex-column content-center">
+                            <div className="flex justify-end">
+                                <input type="button"
+                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
+                                       onClick={() => {
+                                           this.onTempApiSave();
+                                           close();
+                                       }} value="💾"/>
+                                <input type="button"
+                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
+                                       onClick={() => {
+                                           this.setState({tempAPI: GET_URL()});
+                                           close();
+                                       }} value="❌"/>
+                            </div>
+                            <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>
+                            <div className="flex flex-wrap justify-center">
+                                <FormButton label="Esbsit" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
+                                <FormButton label="ESB" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(ESB_DFS_URL)}/>
+                                <FormButton label="DFS_API" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(API_DFS_URL)}/>
+                                <FormButton label="DFS_DEV" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(DEV_API_DFS_URL)}/>
+                                <FormButton label="DFS_STAGE" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(STAGING_API_DFS_URL)}/>
+                            </div>
+                        </div>
+                    )}}
+                </Popup>
             </div>
         )
     }
