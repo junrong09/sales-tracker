@@ -40,34 +40,34 @@ class Login extends React.Component {
                         }
                     }}/>
                 </Link>
-                <Popup modal className=""
-                       trigger={<input className="w2 h2 f4 self-end bg-transparent bn grow" type="button" value="⚙️"/>}>
-                    {close => (
-                        <div className="flex flex-column content-center">
-                            <div className="flex justify-end">
-                                <input type="button"
-                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
-                                       onClick={() => {
-                                           this.onTempApiSave();
-                                           close();
-                                       }} value="💾"/>
-                                <input type="button"
-                                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"
-                                       onClick={() => {
-                                           this.setState({tempAPI: GET_URL()});
-                                           close();
-                                       }} value="❌"/>
-                            </div>
-                            <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>
-                            <div className="flex flex-wrap justify-center">
-                                <FormButton label="Esbsit" className="ma1"
-                                            onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
-                                <FormButton label="serveo" className="ma1"
-                                            onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>
-                            </div>
-                        </div>
-                    )}
-                </Popup>
+                {/*<Popup modal className=""*/}
+                {/*       trigger={<input className="w2 h2 f4 self-end bg-transparent bn grow" type="button" value="⚙️"/>}>*/}
+                {/*    {close => (*/}
+                {/*        <div className="flex flex-column content-center">*/}
+                {/*            <div className="flex justify-end">*/}
+                {/*                <input type="button"*/}
+                {/*                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"*/}
+                {/*                       onClick={() => {*/}
+                {/*                           this.onTempApiSave();*/}
+                {/*                           close();*/}
+                {/*                       }} value="💾"/>*/}
+                {/*                <input type="button"*/}
+                {/*                       className="bg-transparent bn w2 h2 br-100 b self-end hover-bg-washed-blue grow"*/}
+                {/*                       onClick={() => {*/}
+                {/*                           this.setState({tempAPI: GET_URL()});*/}
+                {/*                           close();*/}
+                {/*                       }} value="❌"/>*/}
+                {/*            </div>*/}
+                {/*            <FormTextBox label="API" onChange={this.onTempApiChange} defaultText={this.state.tempAPI}/>*/}
+                {/*            <div className="flex flex-wrap justify-center">*/}
+                {/*                <FormButton label="Esbsit" className="ma1"*/}
+                {/*                            onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>*/}
+                {/*                <FormButton label="serveo" className="ma1"*/}
+                {/*                            onClick={() => this.onTempApiTextChange(SERVEO_URL)}/>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    )}*/}
+                {/*</Popup>*/}
             </div>
         )
     }
