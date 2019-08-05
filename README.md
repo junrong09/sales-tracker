@@ -14,14 +14,19 @@ This application serves to help SAs track their sales real-time and measure thei
 
 ## Preview & Functionality
 ### Login
-<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/login.jpg" alt="Sales Summary UI" width="200"/>
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/login.jpg" alt="login UI" width="200"/>
 <br>
 Prompt for unique SA's ID to access their personal sales data.
 
-![Sales Summary UI](https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.png =200x)
+### Sales Summary
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.png" alt="sales summary UI" width="200"/>
+<br>
 Visual display of sales and their target. 
 
-![Sales transactions UI](https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab2.jpg =300x)
+### Sales Transctions
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab2.jpg" alt="sales transactions UI" width
+="200"/>
+<br>
 View sales in transaction-level with drill-down view in item-level.
 
 ## Architecture
