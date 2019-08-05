@@ -14,7 +14,8 @@ This application serves to help SAs track their sales real-time and measure thei
 
 ## Preview & Functionality
 ### Login
-![Sales Summary UI](https://github.com/junrong09/sales-tracker/blob/master/ui_samples/login.jpg =100x)
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/login.jpg" alt="Sales Summary UI" width="200"/>
+<br>
 Prompt for unique SA's ID to access their personal sales data.
 
 ![Sales Summary UI](https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.png =200x)
