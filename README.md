@@ -15,34 +15,22 @@ This application serves to help SAs track their sales real-time and measure thei
 ## Preview & Functionality
 ### Login
 <img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/login.jpg" alt="login UI" width="200"/>
-<br>
 Prompt for unique SA's ID to access their personal sales data.
 
 ### Sales Summary
 <img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.png" alt="sales summary UI" width="200"/>
-<br>
 Visual display of sales and their target. 
 
 ### Sales Transctions
-<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab2.jpg" alt="sales transactions UI" width
-="200"/>
-<br>
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab2.jpg" alt="sales transactions UI" width="200"/>
 View sales in transaction-level with drill-down view in item-level.
 
 ## Architecture
-
-![architecture](https://github.com/junrong09/sales-tracker/blob/master/ui_samples/architecture.jpg)
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/architecture.jpg" alt="architecture" width="600"/>
 
 ## Specification
 ### Progressive-web-application (PWA)
-
-
-
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Supports all modern operating-systems
+* Removed reliance on web server 
+* Loads fast and works offline
+* Feels like native-application
