@@ -18,7 +18,7 @@ This application serves to help SAs track their sales real-time and measure thei
 Prompt for unique SA's ID to access their personal sales data.
 
 ### Sales Summary
-<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.jp" alt="sales summary UI" width="200"/>
+<img src="https://github.com/junrong09/sales-tracker/blob/master/ui_samples/tab1.jpg" alt="sales summary UI" width="200"/>
 Visual display of sales and their target. 
 
 ### Sales Transctions
