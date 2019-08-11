@@ -1,6 +1,7 @@
 // export const GET_TXN = id => MOCK_GET_TXN(id);
 import LocalStorage from "./LocalStorage";
 
+export const POST_FEEDBACK = () => "https://sheetdb.io/api/v1/6o0f6mps7z64v";
 export const GET_TXN = id => API_URL_GET_TXN(id);
 export const POST_TARGET = () => API_URL_POST_TARGET();
 export const GET_TARGET = (id) => API_URL_GET_TARGET(id);

@@ -7,12 +7,14 @@ class TabBar extends React.Component {
 
         return (
             <div className="flex w-100 ph1 mt3 bb light-gray">
-                <div className={"b mr2 sans-serif hover-blue " + active("summary")}
-                     onClick={() => this.props.onTabChange("summary")}>Summary</div>
+                <div className={"b mr2 sans-serif hover-blue " + active("targetSetter")}
+                     onClick={() => this.props.onTabChange("targetSetter")}>Target</div>
                 <div className={"b mr2 sans-serif hover-blue " + active("transactions")}
                      onClick={() => this.props.onTabChange("transactions")}>Transactions</div>
-                <div className={"b sans-serif hover-blue " + active("targetSetter")}
-                     onClick={() => this.props.onTabChange("targetSetter")}>Target</div>
+                <div className={"b mr2 sans-serif hover-blue " + active("summary")}
+                    onClick={() => this.props.onTabChange("summary")}>Summary</div>
+                <div className={"b mr2 sans-serif hover-blue " + active("feedback")}
+                     onClick={() => this.props.onTabChange("feedback")}>Feedback</div>
             </div>
         )
     }
