@@ -4,13 +4,16 @@ import FormTextField from "./FormTextField";
 import {POST_FEEDBACK} from "./Constant";
 import {toastError, toastSuccess} from "./Toast";
 import Rating from "react-rating";
+import starFilled from "../img/star-filled.png";
+import starUnfilled from "../img/star-unfilled.png";
+
 
 class FeedbackTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
             comments: '',
-            ratings: 0
+            ratings: 1
         };
     }
 
@@ -46,8 +49,9 @@ class FeedbackTab extends Component {
             <div className="flex flex-column items-center vh-75 w-100">
                 <p className="b sans-serif mid-gray">Feedback Dropbox</p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
-                    <Rating  onClick={this.onRatingsChange} onHover={this.onRatingsChange} fullSymbol="fa fa-star fa-2x" emptySymbol="far fa-star fa-2x" className="yellow mb3"/>
-                    <FormTextField label="Comments" onChange={this.onCommentsChange}/>
+                    <Rating  onChange={this.onRatingsChange} initialRating={this.state.ratings}
+                             fullSymbol={<img src={starFilled} alt="filled star" className="h2"/>} emptySymbol={<img src={starUnfilled} alt="unfilled star" className="h2"/>} className="mb3" />
+                    <FormTextField label="Comment" onChange={this.onCommentsChange} placeholder="Add your comment (optional)"/>
                     <FormButton label="Submit" onClick={this.onSubmit}/>
                 </div>
             </div>
