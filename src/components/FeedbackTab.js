@@ -58,7 +58,7 @@ class FeedbackTab extends Component {
             LocalStorage.removeComments();
         else
             LocalStorage.saveComments(this.state.comments);
-        
+
         if (this.state.ratings === 1)
             LocalStorage.removeRatings();
         else
@@ -68,7 +68,7 @@ class FeedbackTab extends Component {
     render() {
         return (
             <div className="flex flex-column items-center vh-75 w-100">
-                <p className="b sans-serif mid-gray">Feedback Dropbox</p>
+                <p className="b sans-serif mid-gray">How is Our App?</p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
                     <Rating  onChange={this.onRatingsChange} initialRating={this.state.ratings}
                              fullSymbol={<img src={starFilled} alt="filled star" className="h2"/>} emptySymbol={<img src={starUnfilled} alt="unfilled star" className="h2"/>} className="mb3" />
