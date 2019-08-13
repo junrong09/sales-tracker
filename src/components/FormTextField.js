@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormTextField = ({label, onChange, defaultText, placeholder}) => {
+const FormTextField = ({label, onChange, value, placeholder}) => {
     const ranNum = Math.floor(Math.random() * 100000);
     return (
         <div className="flex flex-column mh3 mv2">
@@ -8,7 +8,7 @@ const FormTextField = ({label, onChange, defaultText, placeholder}) => {
                 {label}
             </label>
             <textarea className="f6 mt3 mb1 mw6 w-100 h4 bl-0 br-0 bt-0 pl2 bg-washed-blue grow sans-serif b--light-gray no-resize"
-    placeholder={placeholder === undefined ? "Enter your " + label + "..." : placeholder} onChange={onChange}/>
+                      placeholder={placeholder === undefined ? "Enter your " + label + "..." : placeholder} onChange={onChange} value={value}/>
         </div>
     )
 };
