@@ -88,7 +88,6 @@ class App extends React.Component {
             })
     };
     onLogout = () => {
-        LocalStorage.clearAllUserCache();
         this.setState({
             id: '', bizDate: undefined, transactions: undefined, curTarget : '', targetBizDate: ''
         });

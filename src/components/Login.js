@@ -15,6 +15,7 @@ import {
 } from "./Constant";
 import Popup from "reactjs-popup";
 import FormNumberBox from "./FormNumberBox";
+import LocalStorage from "./LocalStorage";
 
 class Login extends React.Component {
     constructor(props) {
@@ -40,6 +41,10 @@ class Login extends React.Component {
     onTempApiChange = (event) => this.onTempApiTextChange(event.target.value);
     onTempApiTextChange = (text) => this.setState({tempAPI: text});
     onTempApiSave = () => SET_URL(this.state.tempAPI);
+
+    componentDidMount() {
+        LocalStorage.clearAllUserCache();
+    }
 
     render() {
         return (
