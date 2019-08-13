@@ -8,7 +8,7 @@ import LocalStorage from "./components/LocalStorage";
 import logo from "./img/logo.png";
 import 'react-toastify/dist/ReactToastify.css';
 import {toastComponent, toastError, toastWarning} from "./components/Toast";
-import {GET_TARGET, GET_TXN} from "./components/Constant";
+import {FORMAT_DATE, GET_TARGET, GET_TXN} from "./components/Constant";
 
 class App extends React.Component {
     constructor(props) {
@@ -39,13 +39,22 @@ class App extends React.Component {
         this.onTransactionsFetchID(this.state.id);
         this.onTargetFetchID(this.state.id);
     };
+    isRecentDate = (bizdate) => {
+        let d = FORMAT_DATE(bizdate);
+
+        let today = new Date();
+        let yest = new Date();
+        yest.setDate(yest.getDate() - 1);
+
+        return (d.toDateString() === today.toDateString() || d.toDateString() === yest.toDateString());
+    };
     onTransactionsFetchID = (id) => {
         fetch(GET_TXN(id), {
             method: 'get'
         })
             .then(response => response.text())
             .then(text => {
-                if (text === "No associated sales found for the day!") {
+                if (text === "No associated sales found for the day!" || !this.isRecentDate(JSON.parse(text).bizDate)) {
                     toastWarning("fetch", "⚠️ No sales for the day");
                     this.setState({bizDate : undefined});
                     return [];
