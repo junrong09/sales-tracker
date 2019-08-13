@@ -14,6 +14,7 @@ import {
     storeOptions
 } from "./Constant";
 import Popup from "reactjs-popup";
+import FormNumberBox from "./FormNumberBox";
 
 class Login extends React.Component {
     constructor(props) {
@@ -25,7 +26,14 @@ class Login extends React.Component {
         }
     }
 
-    onTempIdChange = (event) => this.setState({tempId: event.target.value});
+    onTempIdChange = (event) => {
+        if (event.target.checkValidity()) {
+            this.setState({tempId: event.target.value})
+        } else {
+            this.setState({tempId: ''});
+            toastWarning("invalidLogin", "⚠️ Invalid id");
+        }
+    };
     onTempStoreIdChange = (event) => {
         this.setState({tempStoreId: storeOptions.get(event.target.selectedOptions[0].value)[0]});
     };
@@ -37,7 +45,7 @@ class Login extends React.Component {
         return (
             <div className="flex flex-column w-90 mw6 mv5 mv6-ns pv4 ph3 br2 shadow-3">
                 <span className="f4 f3-ns fw5 mb3 sans-serif mid-gray">Login</span>
-                <FormTextBox label="Employee ID" onChange={this.onTempIdChange}/>
+                <FormNumberBox label="Employee ID" onChange={this.onTempIdChange} step="1"/>
                 {/*<FormDropDown label="Store" options={storeOptions} onChange={this.onTempStoreIdChange}/>*/}
                 <Link to="/sales">
                     <FormButton label="Next" onClick={() => {

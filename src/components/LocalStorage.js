@@ -1,4 +1,9 @@
 class LocalStorage {
+    static clearAllUserCache = () => {
+      LocalStorage.removeID();
+      LocalStorage.removeComments();
+      LocalStorage.removeRatings();
+    };
 
     static saveID = (id) => LocalStorage.put("savedID", id);
     static getID = () => LocalStorage.get("savedID") === null ? '' : LocalStorage.get("savedID");
@@ -7,6 +12,14 @@ class LocalStorage {
     static saveAPI = (api) => LocalStorage.put("savedAPI", api);
     static getAPI = () => LocalStorage.get("savedAPI") === null ? '' : LocalStorage.get("savedAPI");
     static removeAPI = () => LocalStorage.remove("savedAPI");
+
+    static saveComments = (comments) => LocalStorage.put("savedComments", comments);
+    static getComments = () => LocalStorage.get("savedComments") === null ? '' : LocalStorage.get("savedComments");
+    static removeComments = () => LocalStorage.remove("savedComments");
+
+    static saveRatings = (ratings) => LocalStorage.put("savedRatings", ratings);
+    static getRatings = () => LocalStorage.get("savedRatings") === null ? 1 : parseInt(LocalStorage.get("savedRatings"), 10);
+    static removeRatings = () => LocalStorage.remove("savedRatings");
 
     static put = (key, value) => {
         return window.localStorage.setItem(key, value);

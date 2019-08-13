@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import FormTextBox from "./FormTextBox";
 import FormButton from "./FormButton";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
 import {FORMAT_DATE, FORMAT_DATE_LOCALE, FORMAT_SHORT_DATE_LOCALE, POST_TARGET, YYYYMMDD} from "./Constant";
 import DateSwitcher from "./DateSwitcher";
+import FormNumberBox from "./FormNumberBox";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
@@ -14,7 +14,14 @@ class SalesTargetSetterTab extends Component {
         };
     }
 
-    onTargetChange = (event) => this.setState({newTarget: event.target.value});
+    onTargetChange = (event) => {
+        if (event.target.checkValidity()) {
+            this.setState({newTarget: event.target.value})
+        } else {
+            this.setState({newTarget: ''});
+            toastWarning("invalidInput", "⚠️ Invalid Input");
+        }
+    };
 
     onTargetSubmit = () => {
         if (isNaN(this.state.newTarget) || /\s/.test(this.state.newTarget) || this.state.newTarget === '') {
@@ -77,7 +84,7 @@ class SalesTargetSetterTab extends Component {
                         : "(Last recorded, " + FORMAT_SHORT_DATE_LOCALE(this.props.targetBizDate) + ") "}
                 </p>
                 <div className="flex flex-column w-90 mw6 pv4 ph3 br2 shadow-3">
-                    <FormTextBox label="Target" onChange={this.onTargetChange} placeholder="Set/Change day sales target"/>
+                    <FormNumberBox label="Target" onChange={this.onTargetChange} placeholder="Set/Change day sales target" step="0.01"/>
                     <FormButton label="Submit" onClick={this.onTargetSubmit}/>
                 </div>
             </div>
