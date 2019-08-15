@@ -1,5 +1,6 @@
 // export const GET_TXN = id => MOCK_GET_TXN(id);
 import LocalStorage from "./LocalStorage";
+import moment from "moment";
 
 export const POST_FEEDBACK = () => "https://sheetdb.io/api/v1/6o0f6mps7z64v";
 export const GET_TXN = id => API_URL_GET_TXN(id);
@@ -29,31 +30,22 @@ const API_URL_GET_TARGET = id => API_IN_USE + "/target/" + id;
 // const MOCK_POST_TARGET = () => HOST + "/target";
 
 export const FORMAT_DATE_LOCALE = (date) => {
-    let spacedDate = date.substring(0, 4) + " " + date.substring(4, 6) + " " + date.substring(6, 8);
-    return new Date(spacedDate).toLocaleDateString('en-US', {day: "numeric", month: "short", year: "numeric"});
+    return FORMAT_DATE(date).format("MMM D, YYYY");
 };
 export const FORMAT_SHORT_DATE_LOCALE = (date) => {
-    let spacedDate = date.substring(0, 4) + " " + date.substring(4, 6) + " " + date.substring(6, 8);
-    return new Date(spacedDate).toLocaleDateString('en-US', {day: "numeric", month: "short"});
+    return FORMAT_DATE(date).format("MMM D");
 };
 export const FORMAT_DATE = (date) => {
-    let spacedDate = date.substring(0, 4) + " " + date.substring(4, 6) + " " + date.substring(6, 8);
-    return new Date(spacedDate);
+    return moment(date, "YYYYMMDD");
 };
-export const NOW_DATE_FORMATTED = () => new Date().toLocaleDateString('en-US', {
-    day: "numeric",
-    month: "short",
-    year: "numeric"
-});
-export const YYYYMMDD = (date) => {
-    let mm = date.getMonth() + 1; // getMonth() is zero-based
-    let dd = date.getDate();
+export const NOW_DATE_FORMATTED = () => moment().format("MMM D, YYYY");
+export const isRecentDate = (bizdate) => {
+    let d = FORMAT_DATE(bizdate);
 
-    return [date.getFullYear(),
-        (mm > 9 ? '' : '0') + mm,
-        (dd > 9 ? '' : '0') + dd
-    ].join('');
+    let yest = moment().subtract(1, 'days');
+    return d.isBetween(yest, moment(), 'day', "[]");
 };
+
 
 export const storeOptions = new Map();
 storeOptions.set("Sydney", [25]);

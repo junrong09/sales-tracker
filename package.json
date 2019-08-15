@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://junrong09.github.io/sales-tracker",
   "dependencies": {
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-rating": "^1.7.2",
