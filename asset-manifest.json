@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sales-tracker/static/css/main.c3a46a3e.chunk.css",
-    "main.js": "/sales-tracker/static/js/main.cc4fcdc4.chunk.js",
-    "main.js.map": "/sales-tracker/static/js/main.cc4fcdc4.chunk.js.map",
+    "main.js": "/sales-tracker/static/js/main.6e44a3c4.chunk.js",
+    "main.js.map": "/sales-tracker/static/js/main.6e44a3c4.chunk.js.map",
     "runtime~main.js": "/sales-tracker/static/js/runtime~main.b2a9d644.js",
     "runtime~main.js.map": "/sales-tracker/static/js/runtime~main.b2a9d644.js.map",
     "static/css/2.3130bd71.chunk.css": "/sales-tracker/static/css/2.3130bd71.chunk.css",
     "static/js/2.c92315e3.chunk.js": "/sales-tracker/static/js/2.c92315e3.chunk.js",
     "static/js/2.c92315e3.chunk.js.map": "/sales-tracker/static/js/2.c92315e3.chunk.js.map",
     "index.html": "/sales-tracker/index.html",
-    "precache-manifest.702499c44aa13ded0ad4e7b9c7f3d523.js": "/sales-tracker/precache-manifest.702499c44aa13ded0ad4e7b9c7f3d523.js",
+    "precache-manifest.23d17230a3332c4fb43f6b9c145cd452.js": "/sales-tracker/precache-manifest.23d17230a3332c4fb43f6b9c145cd452.js",
     "service-worker.js": "/sales-tracker/service-worker.js",
     "static/css/2.3130bd71.chunk.css.map": "/sales-tracker/static/css/2.3130bd71.chunk.css.map",
     "static/css/main.c3a46a3e.chunk.css.map": "/sales-tracker/static/css/main.c3a46a3e.chunk.css.map"
