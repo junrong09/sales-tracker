@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import FormButton from "./FormButton";
 import {toastError, toastSuccess, toastWarning} from "./Toast";
-import {FORMAT_DATE, FORMAT_DATE_LOCALE, FORMAT_SHORT_DATE_LOCALE, POST_TARGET, YYYYMMDD} from "./Constant";
+import {FORMAT_DATE, FORMAT_DATE_LOCALE, FORMAT_SHORT_DATE_LOCALE, isRecentDate, POST_TARGET} from "./Constant";
 import DateSwitcher from "./DateSwitcher";
 import FormNumberBox from "./FormNumberBox";
+import moment from "moment";
 
 class SalesTargetSetterTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
             newTarget: '',
-            selectedDate: typeof this.props.bizDate === "undefined" ? YYYYMMDD(new Date()) : this.props.bizDate
+            selectedDate: typeof this.props.bizDate === "undefined" ? moment().format("YYYYMMDD") : this.props.bizDate
         };
     }
 
@@ -55,20 +56,16 @@ class SalesTargetSetterTab extends Component {
 
     onDateChange = (days) => {
         let d = FORMAT_DATE(this.state.selectedDate);
-        d.setDate(d.getDate() + days);
+        d.add(days, 'days');
 
-        let today = new Date();
-        let yest = new Date();
-        yest.setDate(yest.getDate() - 1);
-
-        if (d.toDateString() === today.toDateString() || d.toDateString() === yest.toDateString()) {
-            this.setState({selectedDate: YYYYMMDD(d)});
+        if (isRecentDate(d)) {
+            this.setState({selectedDate: d.format("YYYYMMDD")});
         }
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.bizDate !== this.props.bizDate)
-            this.setState({selectedDate: typeof this.props.bizDate === "undefined" ? YYYYMMDD(new Date()) : this.props.bizDate});
+            this.setState({selectedDate: typeof this.props.bizDate === "undefined" ? moment().format("YYYYMMDD") : this.props.bizDate});
     }
 
     render() {

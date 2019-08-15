@@ -7,6 +7,7 @@ import Rating from "react-rating";
 import starFilled from "../img/star-filled.png";
 import starUnfilled from "../img/star-unfilled.png";
 import LocalStorage from "./LocalStorage";
+import moment from "moment";
 
 
 class FeedbackTab extends Component {
@@ -29,7 +30,7 @@ class FeedbackTab extends Component {
         fetch(POST_FEEDBACK(), {
             method: 'post', headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({data: [{id: this.props.id, ratings: this.state.ratings,
-                    comments: this.state.comments, dateTime: Date(Date.now()).toString()}]})
+                    comments: this.state.comments, dateTime: moment().toString()}]})
         })
             .then(res => {
                 if (res.status === 201) {
