@@ -91,7 +91,7 @@ class App extends React.Component {
                 <header className="flex justify-center items-center h3 shadow-2">
                     <img src={logo} alt="DFS" className="w2 h2 mh2 mh3-ns"/>
                     <h1 className="f3 f2-ns fw7 mv0 sans-serif mid-gray">Sales Tracker</h1>
-                    <p className="bg-DFS-red white i b f7 br2 pa1 sans-serif absolute right-1 banner-rotation">BETA<br/>v1.07</p>
+                    <p className="bg-DFS-red white i b f7 br2 pa1 sans-serif absolute right-1 banner-rotation">BETA<br/>v1.08</p>
                 </header>
 
                 <main className="flex flex-column items-center">
