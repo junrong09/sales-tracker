@@ -38,3 +38,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance:textfield; /* Firefox */
 }
+
+.banner-rotation {
+  -webkit-transform: rotate( 340deg ); transform: rotate( 340deg );
+}
+
+.bg-DFS-red { background-color: #bf2e1a; }
