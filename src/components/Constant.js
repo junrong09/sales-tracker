@@ -15,7 +15,7 @@ export const GET_URL = () => API_IN_USE;
 export const KAFKA_URL = "https://esbsit.dfs.com:5555/rest/DFS/demo";
 // export const KAFKA_URL = "http://x-sin-edp-p-app-8-s01.dfs:9090/outdo-services/v1";
 export const SERVEO_URL = "https://api09.serveo.net/outdo-services/v1";
-export const MOCK_URL = "https://dfsgroup-sandbox.apigee.net/outdo-services/v1";
+export const MOCK_URL = "https://dfsgroup-sandbox.apigee.net/dh/outdo-services/v1";
 export const ESB_DFS_URL = "https://esb.dfs.com:5556";
 export const API_DFS_URL = "https://api.dfs.com";
 export const DEV_API_DFS_URL = "https://dev.api.dfs.com";
