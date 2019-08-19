@@ -45,9 +45,15 @@ class App extends React.Component {
         })
             .then(response => response.text())
             .then(text => {
-                if (text === "No associated sales found for the day!" || !isRecentDate(JSON.parse(text).bizDate)) {
-                    toastWarning("fetch", "⚠️ No sales for the day");
+                if (text === "No associated sales found for the day!") {
+                    toastWarning("fetch", "⚠️ Invalid SA id, no sales records found");
                     this.setState({bizDate : undefined});
+                    return [];
+                } if (!isRecentDate(JSON.parse(text).bizDate)) {
+                    toastWarning("fetch", "⚠️ No recent sales records");
+                    let json = JSON.parse(text);
+                    this.setState({userName: json.employeeName});
+                    this.setState({currency: json.currency});
                     return [];
                 } else {
                     let json = JSON.parse(text);

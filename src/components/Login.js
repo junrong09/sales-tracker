@@ -8,7 +8,7 @@ import {
     DEV_API_DFS_URL,
     ESB_DFS_URL,
     GET_URL,
-    KAFKA_URL,
+    KAFKA_URL, MOCK_URL,
     SET_URL,
     STAGING_API_DFS_URL,
     storeOptions
@@ -85,6 +85,8 @@ class Login extends React.Component {
                             <div className="flex flex-wrap justify-center">
                                 <FormButton label="Esbsit" className="ma1"
                                             onClick={() => this.onTempApiTextChange(KAFKA_URL)}/>
+                                <FormButton label="MOCK" className="ma1"
+                                            onClick={() => this.onTempApiTextChange(MOCK_URL)}/>
                                 <FormButton label="ESB" className="ma1"
                                             onClick={() => this.onTempApiTextChange(ESB_DFS_URL)}/>
                                 <FormButton label="DFS_API" className="ma1"
