@@ -41,10 +41,11 @@ export const FORMAT_DATE = (date) => {
 };
 export const NOW_DATE_FORMATTED = () => moment().format("MMM D, YYYY");
 export const isRecentDate = (bizdate) => {
-    let d = FORMAT_DATE(bizdate);
-
-    let yest = moment().subtract(1, 'days');
-    return d.isBetween(yest, moment(), 'day', "[]");
+    return true;
+    // let d = FORMAT_DATE(bizdate);
+    //
+    // let yest = moment().subtract(1, 'days');
+    // return d.isBetween(yest, moment(), 'day', "[]");
 };
 
 
