@@ -19,7 +19,7 @@ class SalesLineItemsTable extends Component {
                 </div>
                 <div className="flex flex-column items-center w-30 w-20-ns">
                     <span className="f6 b">{quantity}</span>
-                    <span className="f6 bg-mid-gray br3 white b ph1 pv1 w3">{"$" + value}</span>
+                    <span className="f6 bg-mid-gray br3 white b ph1 pv1 w3-half">{"$" + value}</span>
                 </div>
             </div>
         );
