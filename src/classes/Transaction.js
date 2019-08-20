@@ -1,3 +1,18 @@
+export const filterData = (nestedTransactions, key) => {
+    let filteredTransactions = [];
+    nestedTransactions.forEach((t) => {
+       if (isMatchedTransaction(t, key))
+           filteredTransactions.push(t);
+    });
+    return filteredTransactions;
+};
+
+const isMatchedTransaction = (transaction, key) => {
+    return transaction.lines.find((line) => {
+        return line.itemId.includes(key);
+    })
+};
+
 export const aggregateData = (transactions) => {
     let map = new Map();
     transactions.forEach((t) => {

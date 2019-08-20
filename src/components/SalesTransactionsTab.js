@@ -1,11 +1,20 @@
 import React from "react";
 import ReactTable, {ReactTableDefaults} from 'react-table'
 import 'react-table/react-table.css'
-import {aggregateData} from "../classes/Transaction";
+import {aggregateData, filterData} from "../classes/Transaction";
 import {FORMAT_DATE_LOCALE, NOW_DATE_FORMATTED} from "./Constant";
 import SalesLineItemsTable from "./SalesLineItemsTable";
+import FormSelectorTextBox from "./FormSelectorTextBox";
 
 class SalesTransactionsTab extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterKey: '',
+            filterAttr: 'itemId'
+        }
+    }
+
     headersL1 = [
         {Header: 'Time', accessor: 'txnDate', minWidth: 50},
         {Header: 'Txn#', accessor: 'txnNum', minWidth: 50},
@@ -15,6 +24,15 @@ class SalesTransactionsTab extends React.Component {
         }}
     ];
 
+    onChangeFilterKey = (event) => {
+        this.setState({filterKey: event.target.value});
+    };
+
+    onChangeFilterAttr = (event) => {
+        console.log(event.target.selectedOptions[0].value);
+        this.setState({filterAttr: event.target.selectedOptions[0].value});
+    };
+
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return this.props.date !== nextProps.data;
     }
@@ -23,6 +41,8 @@ class SalesTransactionsTab extends React.Component {
         let formattedData;
         if (typeof this.props.data !== "undefined") {
             formattedData = aggregateData(this.props.data);
+            if (this.state.filterKey !== '')
+                formattedData = filterData(formattedData, this.state.filterKey);
         }
 
         return (
@@ -31,6 +51,8 @@ class SalesTransactionsTab extends React.Component {
                     Sales Transactions</p>
                 {typeof this.props.data !== "undefined" &&
                 <div className="flex flex-column items-center w-100 pb4 sans-serif">
+                    <FormSelectorTextBox onTextChange={this.onChangeFilterKey} onCategoryChange={this.onChangeFilterAttr}/>
+
                     <ReactTable columns={this.headersL1} data={formattedData}
                                 defaultPageSize={formattedData.length > 10 ? 10 : formattedData.length}
                                 className="w-90 pb2 f5 mid-gray" showPageJump={false}

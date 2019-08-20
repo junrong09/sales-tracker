@@ -28,6 +28,10 @@ code {
   resize: none;
 }
 
+.w3-half {
+  width: 4.5rem;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
